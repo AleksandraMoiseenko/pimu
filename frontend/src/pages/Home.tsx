@@ -24,7 +24,7 @@ export const Home = () => {
     };
 
     return (
-        <Grid container flexDirection="column">
+        <Grid container flexDirection="column" alignItems='center'>
             <Grid item>
                 {data.slice((page - 1) * dataPerPage, page * dataPerPage).map((item) => (
                     <p>{item}</p>

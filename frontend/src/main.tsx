@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { Layout } from './Layout/Layout';
 import './index.css';
+import {AppRouter} from "./router/Router";
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
-        <Layout />
+        <AppRouter />
     </React.StrictMode>,
 );

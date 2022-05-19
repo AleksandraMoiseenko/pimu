@@ -1,7 +1,7 @@
 import DeleteIcon from "@mui/icons-material/Delete";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import {Grid, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Pagination} from '@mui/material';
-import {ChangeEvent, ReactNode, useEffect, useState} from 'react';
+import {ChangeEvent, useEffect, useState} from 'react';
 import {useLocation, useNavigate} from "react-router-dom";
 import {routerPaths, ROUTES_DATA_MAP, ROUTES_NESTED_RENDER_PATH_MAP} from "../const";
 
@@ -39,7 +39,8 @@ export const Main = () => {
                         {data.slice((page - 1) * dataPerPage, page * dataPerPage).map((item: any) => (
                             <ListItem secondaryAction={renderDeleteIcon}>
                                 <ListItemButton onClick={() => {
-                                    navigate(ROUTES_NESTED_RENDER_PATH_MAP[path]);
+                                    if (ROUTES_NESTED_RENDER_PATH_MAP[path] === undefined) return;
+                                    navigate(ROUTES_NESTED_RENDER_PATH_MAP[path]!);
                                 }}>
                                     {renderDownloadIcon}
                                     <ListItemText primary={item}/>

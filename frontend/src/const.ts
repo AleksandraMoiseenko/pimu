@@ -5,7 +5,8 @@ export const routerPaths = {
     courses: '/courses',
     modules: '/modules'
 }
-export const modulesList = [''];
+export const modulesList = ['Терминология восточной медицины',
+    'Анатомическая лаборатория'];
 
 export const coursesList = [
     'Нидерландский курс глобального здравоохранения и тропической медицины',
@@ -51,6 +52,24 @@ export const ROUTES_DATA_MAP = {
 export const ROUTES_NESTED_RENDER_PATH_MAP = {
     [routerPaths.disciplines]: routerPaths.courses,
     [routerPaths.courses]: routerPaths.modules,
-    [routerPaths.modules]: '/',
-    [routerPaths.teachers]: '/'
+    [routerPaths.modules]: undefined,
+    [routerPaths.teachers]: undefined
+}
+
+export const TAB_LABEL_PATH_MAP = {
+    [routerPaths.disciplines]: {
+        label: 'Дисциплины',
+        value: routerPaths.disciplines,
+        to: routerPaths.disciplines
+    },
+    [routerPaths.courses]: {
+        label: 'Курсы',
+        value: routerPaths.courses,
+        to: routerPaths.courses
+    },
+    [routerPaths.modules]: {
+        label: 'Модули',
+        value: routerPaths.modules,
+        to: routerPaths.modules
+    },
 }

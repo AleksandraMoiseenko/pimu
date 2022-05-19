@@ -1,6 +1,7 @@
 import React from "react";
 import {Box, Fab} from '@mui/material';
 import {Link, matchPath, Outlet, useLocation} from "react-router-dom";
+import {routerPaths, TAB_LABEL_PATH_MAP} from "../const";
 import {Header} from "./Header";
 import AddIcon from '@mui/icons-material/Add';
 import Tabs from '@mui/material/Tabs';
@@ -34,7 +35,9 @@ function useRouteMatch(patterns: readonly string[]) {
 }
 
 export function Layout() {
-    const routeMatch = useRouteMatch(['/', '/disciplines', '/teachers']);
+    let location = useLocation();
+    let path = location.pathname;
+    const routeMatch = useRouteMatch([routerPaths.root, routerPaths.courses, routerPaths.disciplines, routerPaths.modules, routerPaths.teachers]);
     const currentTab = routeMatch?.pattern?.path;
 
     return (
@@ -48,8 +51,14 @@ export function Layout() {
                         textColor="inherit"
                         variant="fullWidth"
                     >
-                        <Tab label="Дисциплины" value="/disciplines" to="disciplines" component={Link}/>
-                        <Tab label="Преподователи" value="/teachers" to="teachers" component={Link}/>
+                        <Tab label={TAB_LABEL_PATH_MAP[path]?.label || 'Дисциплины'}
+                             value={TAB_LABEL_PATH_MAP[path]?.value || routerPaths.disciplines}
+                             to={TAB_LABEL_PATH_MAP[path]?.to || routerPaths.disciplines}
+                             component={Link}/>
+                        <Tab label="Преподователи"
+                             value="/teachers"
+                             to="teachers"
+                             component={Link}/>
                     </Tabs>
                     <Outlet/>
                 </Box>

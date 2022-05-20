@@ -3,8 +3,13 @@ export const routerPaths = {
     teachers: '/teachers',
     disciplines: '/disciplines',
     courses: '/courses',
-    modules: '/modules'
+    modules: '/modules',
+    topics: '/topics',
+    new: '/new'
 }
+
+export const topicsList = ['Какая-то тема 1', 'Какая-то тема 2'];
+
 export const modulesList = ['Терминология восточной медицины',
     'Анатомическая лаборатория'];
 
@@ -46,13 +51,14 @@ export const ROUTES_DATA_MAP = {
     [routerPaths.disciplines]: disciplineList,
     [routerPaths.courses]: coursesList,
     [routerPaths.modules]: modulesList,
+    [routerPaths.topics]: topicsList,
     [routerPaths.teachers]: teachersList
 }
 
 export const ROUTES_NESTED_RENDER_PATH_MAP = {
     [routerPaths.disciplines]: routerPaths.courses,
     [routerPaths.courses]: routerPaths.modules,
-    [routerPaths.modules]: undefined,
+    [routerPaths.modules]: routerPaths.topics,
     [routerPaths.teachers]: undefined
 }
 
@@ -72,4 +78,88 @@ export const TAB_LABEL_PATH_MAP = {
         value: routerPaths.modules,
         to: routerPaths.modules
     },
+}
+
+export const CREATE_FIELDS_MAP = {
+    [routerPaths.disciplines]: [
+        {
+            name: 'title',
+            label: 'Название'
+        },
+        {
+            name: 'goal',
+            label: 'Цель освоения'
+        },
+        {
+            name: 'description',
+            label: 'Описание'
+        },
+        {
+            name: 'result',
+            label: 'Результаты'
+        },
+        {
+            name: 'author',
+            label: 'Авторы'
+        },
+    ],
+    [routerPaths.courses]: [
+        {
+            name: 'id',
+            label: 'Идентификатор (код курса)'
+        },
+        {
+            name: 'title',
+            label: 'Название'
+        },
+        {
+            name: 'description',
+            label: 'Краткое описание'
+        },
+        {
+            name: 'release',
+            label: 'Сроки реализации'
+        },
+        {
+            name: 'elements',
+            label: 'Элементы контроля (и критерии успешного освоения)'
+        },
+        {
+            name: 'author',
+            label: 'Авторы (преподаватели)'
+        },
+    ],
+    [routerPaths.modules]: [
+        {
+            name: 'id',
+            label: 'Идентификатор (код модуля)'
+        },
+        {
+            name: 'title',
+            label: 'Название'
+        },
+        {
+            name: 'release',
+            label: 'Сроки реализации'
+        },
+        {
+            name: 'author',
+            label: 'Авторы (преподаватели)'
+        },
+    ],
+    [routerPaths.topics]: [
+        {
+            name: 'title',
+            label: 'Название'
+        },
+        {
+            name: 'description',
+            label: 'Содержание (описание)'
+        },
+        {
+            name: 'files',
+            label: 'Файлы',
+            hasAttach: true
+        }
+    ]
 }

@@ -65,11 +65,13 @@ export function Layout() {
                     <Outlet/>
                 </Box>
             </Box>
-            <Fab onClick={() => navigate('/new', {
-                state: {
-                    from: path
-                }
-            })} color="primary" aria-label="add" sx={fabStyleAddCourse}>
+            <Fab disabled={[routerPaths.root, routerPaths.new, routerPaths.teachers].includes(path)} onClick={() => {
+                navigate(routerPaths.new, {
+                    state: {
+                        from: path
+                    }
+                })
+            }} color="primary" aria-label="add" sx={fabStyleAddCourse}>
                 <AddIcon/>
             </Fab>
             <Link to="/tutors.csv" target="_blank" download>

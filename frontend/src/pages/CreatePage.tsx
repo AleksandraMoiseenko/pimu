@@ -32,6 +32,7 @@ export const CreatePage = () => {
                     name={f.name}
                     label={f.label}
                     defaultValue=""
+                    type={f.type}
                 />
             </FormControl>
         })}

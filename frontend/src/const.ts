@@ -187,6 +187,7 @@ export const CREATE_FIELDS_MAP = {
         {
             name: 'password',
             label: 'Пароль',
+            type: 'password'
         },
         {
             name: 'email',

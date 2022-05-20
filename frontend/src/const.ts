@@ -93,7 +93,8 @@ export const CREATE_FIELDS_MAP = {
         },
         {
             name: 'goal',
-            label: 'Цель освоения'
+            label: 'Цель освоения',
+            isTextArea: true
         },
         {
             name: 'description',
@@ -102,7 +103,8 @@ export const CREATE_FIELDS_MAP = {
         },
         {
             name: 'result',
-            label: 'Результаты'
+            label: 'Результаты',
+            isTextArea: true
         },
         {
             name: 'author',

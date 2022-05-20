@@ -97,7 +97,8 @@ export const CREATE_FIELDS_MAP = {
         },
         {
             name: 'description',
-            label: 'Описание'
+            label: 'Описание',
+            isTextArea: true
         },
         {
             name: 'result',
@@ -119,7 +120,8 @@ export const CREATE_FIELDS_MAP = {
         },
         {
             name: 'description',
-            label: 'Краткое описание'
+            label: 'Краткое описание',
+            isTextArea: true
         },
         {
             name: 'release',
@@ -159,7 +161,8 @@ export const CREATE_FIELDS_MAP = {
         },
         {
             name: 'description',
-            label: 'Содержание (описание)'
+            label: 'Содержание (описание)',
+            isTextArea: true
         },
         {
             name: 'files',

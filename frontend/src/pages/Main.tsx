@@ -2,7 +2,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import {Grid, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Pagination} from '@mui/material';
 import {ChangeEvent, useEffect, useState} from 'react';
-import {useLocation, useNavigate} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import {routerPaths, ROUTES_DATA_MAP, ROUTES_NESTED_RENDER_PATH_MAP} from "../const";
 
 export const Main = () => {
@@ -27,9 +27,11 @@ export const Main = () => {
         </IconButton>);
 
         const renderDownloadIcon = [routerPaths.root, routerPaths.teachers].includes(path) ? null : (<ListItemIcon>
-            <IconButton edge="end">
-                <FileDownloadIcon/>
-            </IconButton>
+            <Link to="/tutors.csv" target="_blank" download>
+                <IconButton edge="end" onClick={e => e.stopPropagation()}>
+                    <FileDownloadIcon/>
+                </IconButton>
+            </Link>
         </ListItemIcon>);
 
         return (

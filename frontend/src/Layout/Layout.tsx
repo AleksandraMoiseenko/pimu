@@ -65,7 +65,7 @@ export function Layout() {
                     <Outlet/>
                 </Box>
             </Box>
-            <Fab disabled={[routerPaths.root, routerPaths.new, routerPaths.teachers].includes(path)} onClick={() => {
+            <Fab disabled={[routerPaths.root, routerPaths.new].includes(path)} onClick={() => {
                 navigate(routerPaths.new, {
                     state: {
                         from: path

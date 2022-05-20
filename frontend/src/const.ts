@@ -166,5 +166,31 @@ export const CREATE_FIELDS_MAP = {
             label: 'Файлы',
             hasAttach: true
         }
+    ],
+    [routerPaths.teachers]: [
+        {
+            name: 'firstName',
+            label: 'Имя (имя + отчество)'
+        },
+        {
+            name: 'lastName',
+            label: 'Фамилия'
+        },
+        {
+            name: 'faculty',
+            label: 'Факультет',
+        },
+        {
+            name: 'login',
+            label: 'Логин',
+        },
+        {
+            name: 'password',
+            label: 'Пароль',
+        },
+        {
+            name: 'email',
+            label: 'Адрес электронной почты',
+        },
     ]
 }

@@ -66,10 +66,11 @@ export function Layout() {
             <Fab onClick={() => console.log('add courses')} color="primary" aria-label="add" sx={fabStyleAddCourse}>
                 <AddIcon/>
             </Fab>
-
+            <Link to="/tutors.csv" target="_blank" download>
             <Fab onClick={() => console.log('add teacher')} color="primary" aria-label="add" sx={fabStyleAddTeacher}>
                 <FileDownloadIcon/>
             </Fab>
+            </Link>
         </Box>
     );
 }

@@ -27,11 +27,9 @@ export const Main = () => {
         </IconButton>);
 
         const renderDownloadIcon = [routerPaths.root, routerPaths.teachers].includes(path) ? null : (<ListItemIcon>
-            <Link to="/tutors.csv" target="_blank" download>
-                <IconButton edge="end" onClick={e => e.stopPropagation()}>
-                    <FileDownloadIcon/>
-                </IconButton>
-            </Link>
+            <IconButton edge="end" onClick={e => e.stopPropagation()}>
+                <FileDownloadIcon/>
+            </IconButton>
         </ListItemIcon>);
 
         return (

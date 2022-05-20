@@ -11,3 +11,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  padding: 16px 14px;
+  resize: none;
+}

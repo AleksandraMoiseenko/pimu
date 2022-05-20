@@ -27,7 +27,6 @@ const TextArea = (props: any) => {
         <TextareaAutosize
             placeholder={props.field.label}
             minRows={3}
-            style={{width: '99%'}}
         />
     </>
 }

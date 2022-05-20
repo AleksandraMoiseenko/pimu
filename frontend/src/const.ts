@@ -78,6 +78,11 @@ export const TAB_LABEL_PATH_MAP = {
         value: routerPaths.modules,
         to: routerPaths.modules
     },
+    [routerPaths.topics]: {
+        label: 'Темы',
+        value: routerPaths.topics,
+        to: routerPaths.topics
+    },
 }
 
 export const CREATE_FIELDS_MAP = {

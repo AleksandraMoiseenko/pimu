@@ -39,7 +39,7 @@ export function Layout() {
     let path = location.pathname;
     let navigate = useNavigate();
 
-    const routeMatch = useRouteMatch([routerPaths.root, routerPaths.courses, routerPaths.disciplines, routerPaths.modules, routerPaths.teachers]);
+    const routeMatch = useRouteMatch([routerPaths.root, routerPaths.courses, routerPaths.disciplines, routerPaths.modules, routerPaths.teachers, routerPaths.topics]);
     const currentTab = routeMatch?.pattern?.path;
 
     return (

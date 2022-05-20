@@ -3,7 +3,7 @@ import {useState} from "react";
 import {useLocation} from "react-router-dom";
 import {CREATE_FIELDS_MAP} from "../const";
 
-export const Attach = (props) => {
+export const Attach = (props: any) => {
     return <>
         <span>{props.field.label}</span>
         <Button

@@ -69,7 +69,7 @@ export const Main = () => {
 
         api.get(url).then((data: any) => {
             setData(CrudManager.read(data.data.content));
-            setPageCount(data.totalPages);
+            setPageCount(data.data.totalPages);
         });
     }, [location]);
 

@@ -6,7 +6,7 @@ export const transformUrl = (url: string, param: string = '') => {
 };
 
 const config: AxiosRequestConfig = {
-    baseURL: 'https://jsonplaceholder.typicode.com',
+    baseURL: 'http://localhost:8080',
     responseType: 'json',
     timeout: 0,
     headers: {

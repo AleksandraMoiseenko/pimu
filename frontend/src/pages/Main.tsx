@@ -81,7 +81,7 @@ export const Main = () => {
 
         api.get(url).then((data: any) => {
             setPage(value);
-            setData(CrudManager.read(data.content));
+            setData(CrudManager.read(data.data.content));
         });
     };
 

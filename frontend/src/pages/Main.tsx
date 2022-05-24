@@ -74,13 +74,14 @@ export const Main = () => {
     }, [location]);
 
     const handleChange = (event: ChangeEvent<unknown>, value: number) => {
+        setPage(value);
+
         const url =
             transformUrl(FetchUriManager[path], openId) +
             transformUrl(PAGE_PARAM, String(page - 1)) +
             transformUrl(SIZE_PARAM, String(dataPerPage));
 
         api.get(url).then((data: any) => {
-            setPage(value);
             setData(CrudManager.read(data.data.content));
         });
     };

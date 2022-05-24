@@ -89,7 +89,7 @@ export const CreatePage = () => {
                 <Button
                     variant="contained"
                     color="primary"
-                    type="submit"
+                    type="button"
                     onClick={() => {
                         if (isEditing) {
                             return api.put(PutUriManager[from], formData).then((data) => {

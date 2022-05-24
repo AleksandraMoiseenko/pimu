@@ -47,7 +47,7 @@ export const CreatePage = () => {
         let form: any = {};
 
         for (const key of fields) {
-            form[key.name] = item[key.name];
+            form[key.name] = (item && item[key.name]) || '';
         }
         setFormData(form);
     }, []);

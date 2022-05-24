@@ -99,7 +99,7 @@ export const Main = () => {
                                 }}
                             >
                                 {renderDownloadIcon(path)}
-                                <ListItemText primary={item} />
+                                <ListItemText primary={item.name} />
                             </ListItemButton>
                         </ListItem>
                     ))}

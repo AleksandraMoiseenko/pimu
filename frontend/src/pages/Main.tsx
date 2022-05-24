@@ -68,7 +68,7 @@ export const Main = () => {
             transformUrl(SIZE_PARAM, String(dataPerPage));
 
         api.get(url).then((data: any) => {
-            setData(CrudManager.read(data.content));
+            setData(CrudManager.read(data.data.content));
             setPageCount(data.totalPages);
         });
     }, [location]);
@@ -89,7 +89,7 @@ export const Main = () => {
         <Grid container flexDirection="column" alignItems="center">
             <Grid item flexDirection="column" width={'100%'} textAlign={'center'} gap={1}>
                 <List>
-                    {data.length > 0 &&
+                    {data &&
                         data.map((item: any) => (
                             <ListItem secondaryAction={renderDeleteIcon(path, item)}>
                                 <ListItemButton

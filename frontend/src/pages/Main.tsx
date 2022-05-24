@@ -76,7 +76,7 @@ export const Main = () => {
     const handleChange = (event: ChangeEvent<unknown>, value: number) => {
         const url =
             transformUrl(FetchUriManager[path], openId) +
-            transformUrl(PAGE_PARAM, String(value)) +
+            transformUrl(PAGE_PARAM, String(value - 1)) +
             transformUrl(SIZE_PARAM, String(dataPerPage));
 
         api.get(url).then((data: any) => {

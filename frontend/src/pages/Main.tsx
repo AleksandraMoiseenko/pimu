@@ -12,18 +12,23 @@ import {
 } from '@mui/material';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { api, transformUrl } from '../api/client';
-import { routerPaths, ROUTES_DATA_MAP, ROUTES_NESTED_RENDER_PATH_MAP } from '../const';
-import { CrudManager, FetchUriManager } from '../helpers';
+import { api } from '../api/client';
+import { routerPaths, ROUTES_NESTED_RENDER_PATH_MAP } from '../const';
+import { CrudManager, DeleteUriManager, FetchUriManager, UrlBuilder } from '../helpers';
 import { PAGE_PARAM, SIZE_PARAM } from '../urls';
 
-const renderDeleteIcon = (path: string, item: any) =>
+const renderDeleteIcon = (path: string, item: any, data: any, setData: any) =>
     [routerPaths.root, routerPaths.teachers].includes(path) ? null : (
         <IconButton
             edge="end"
             onClick={(e) => {
                 e.stopPropagation();
-                // api.delete('');
+
+                const url = UrlBuilder.build(DeleteUriManager[path], item.id).url;
+                api.delete(url).then((response) => {
+                    setData(CrudManager.delete(data, item.id));
+                    return response;
+                });
             }}
         >
             <DeleteIcon />
@@ -62,10 +67,9 @@ export const Main = () => {
             setOpenId(initOpenId);
         }
 
-        const url =
-            transformUrl(FetchUriManager[path], openId) +
-            transformUrl(PAGE_PARAM, String(page - 1)) +
-            transformUrl(SIZE_PARAM, String(dataPerPage));
+        const url = UrlBuilder.build(FetchUriManager[path], openId)
+            .build(PAGE_PARAM, String(page - 1))
+            .build(SIZE_PARAM, String(dataPerPage)).url;
 
         api.get(url).then((data: any) => {
             setData(CrudManager.read(data.data.content));
@@ -74,10 +78,9 @@ export const Main = () => {
     }, [location]);
 
     const handleChange = (event: ChangeEvent<unknown>, value: number) => {
-        const url =
-            transformUrl(FetchUriManager[path], openId) +
-            transformUrl(PAGE_PARAM, String(value - 1)) +
-            transformUrl(SIZE_PARAM, String(dataPerPage));
+        const url = UrlBuilder.build(FetchUriManager[path], openId)
+            .build(PAGE_PARAM, String(value - 1))
+            .build(SIZE_PARAM, String(dataPerPage)).url;
 
         api.get(url).then((data: any) => {
             setPage(value);
@@ -91,7 +94,7 @@ export const Main = () => {
                 <List>
                     {data &&
                         data.map((item: any) => (
-                            <ListItem secondaryAction={renderDeleteIcon(path, item)}>
+                            <ListItem secondaryAction={renderDeleteIcon(path, item, data, setData)}>
                                 <ListItemButton
                                     onClick={() => {
                                         if (ROUTES_NESTED_RENDER_PATH_MAP[path] === undefined)

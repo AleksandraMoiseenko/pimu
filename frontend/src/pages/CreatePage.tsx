@@ -79,7 +79,7 @@ export const CreatePage = () => {
                             onChange={handleChange}
                             name={field.name}
                             label={field.label}
-                            defaultValue={item[field.name]}
+                            defaultValue={item[field.name] || ''}
                             type={field.type}
                         />
                     </FormControl>

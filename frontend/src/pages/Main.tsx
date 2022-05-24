@@ -89,7 +89,7 @@ export const Main = () => {
         <Grid container flexDirection="column" alignItems="center">
             <Grid item flexDirection="column" width={'100%'} textAlign={'center'} gap={1}>
                 <List>
-                    {data.slice((page - 1) * dataPerPage, page * dataPerPage).map((item: any) => (
+                    {data.map((item: any) => (
                         <ListItem secondaryAction={renderDeleteIcon(path, item)}>
                             <ListItemButton
                                 onClick={() => {

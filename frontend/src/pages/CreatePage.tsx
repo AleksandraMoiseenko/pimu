@@ -69,7 +69,7 @@ export const CreatePage = () => {
                     return (
                         <TextArea
                             field={field}
-                            value={item[field.name]}
+                            value={(item && item[field.name]) || ''}
                             handleChange={handleChange}
                         />
                     );
@@ -79,7 +79,7 @@ export const CreatePage = () => {
                             onChange={handleChange}
                             name={field.name}
                             label={field.label}
-                            defaultValue={item[field.name] || ''}
+                            defaultValue={(item && item[field.name]) || ''}
                             type={field.type}
                         />
                     </FormControl>

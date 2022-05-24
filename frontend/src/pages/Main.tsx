@@ -89,20 +89,22 @@ export const Main = () => {
         <Grid container flexDirection="column" alignItems="center">
             <Grid item flexDirection="column" width={'100%'} textAlign={'center'} gap={1}>
                 <List>
-                    {data.map((item: any) => (
-                        <ListItem secondaryAction={renderDeleteIcon(path, item)}>
-                            <ListItemButton
-                                onClick={() => {
-                                    if (ROUTES_NESTED_RENDER_PATH_MAP[path] === undefined) return;
-                                    navigate(ROUTES_NESTED_RENDER_PATH_MAP[path]!);
-                                    setOpenId(item.id);
-                                }}
-                            >
-                                {renderDownloadIcon(path)}
-                                <ListItemText primary={item.name} />
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
+                    {data.length > 0 &&
+                        data.map((item: any) => (
+                            <ListItem secondaryAction={renderDeleteIcon(path, item)}>
+                                <ListItemButton
+                                    onClick={() => {
+                                        if (ROUTES_NESTED_RENDER_PATH_MAP[path] === undefined)
+                                            return;
+                                        navigate(ROUTES_NESTED_RENDER_PATH_MAP[path]!);
+                                        setOpenId(item.id);
+                                    }}
+                                >
+                                    {renderDownloadIcon(path)}
+                                    <ListItemText primary={item.name} />
+                                </ListItemButton>
+                            </ListItem>
+                        ))}
                 </List>
             </Grid>
             <Grid item>

@@ -1,3 +1,5 @@
+import { GET_COURSES, GET_MODULES, SUBJECTS, GET_TOPICS, TUTORS } from './urls';
+
 export const routerPaths = {
     root: '/',
     teachers: '/teachers',
@@ -5,13 +7,17 @@ export const routerPaths = {
     courses: '/courses',
     modules: '/modules',
     topics: '/topics',
-    new: '/new'
-}
+    new: '/new',
+};
 
-export const topicsList = ['Липидный дисбаланс', 'Электролитный дисбаланс', 'АЛТ и АСТ', 'Влияние йода на состояние щитовидной железы'];
+export const topicsList = [
+    'Липидный дисбаланс',
+    'Электролитный дисбаланс',
+    'АЛТ и АСТ',
+    'Влияние йода на состояние щитовидной железы',
+];
 
-export const modulesList = ['Терминология восточной медицины',
-    'Анатомическая лаборатория'];
+export const modulesList = ['Терминология восточной медицины', 'Анатомическая лаборатория'];
 
 export const coursesList = [
     'Нидерландский курс глобального здравоохранения и тропической медицины',
@@ -25,17 +31,17 @@ export const coursesList = [
 ];
 
 export const disciplineList = [
-    "Актуальные вопросы в хирургии",
-    "Акушерство",
-    "Аналитические методы исследования",
-    "Анатомия",
-    "Анестезиология, реанимация, интенсивная терапия",
-    "Безопасность жизнедеятельности",
-    "Биология",
-    "Биоорганическая химия",
-    "Биохимия",
-    "Биоэтика",
-    "Гигиена"
+    'Актуальные вопросы в хирургии',
+    'Акушерство',
+    'Аналитические методы исследования',
+    'Анатомия',
+    'Анестезиология, реанимация, интенсивная терапия',
+    'Безопасность жизнедеятельности',
+    'Биология',
+    'Биоорганическая химия',
+    'Биохимия',
+    'Биоэтика',
+    'Гигиена',
 ];
 
 export const teachersList = [
@@ -44,7 +50,7 @@ export const teachersList = [
     'Петров Петр Петрович',
     'Перелетов Дмитрий Сергеевич',
     'Остольский Юрий Викторович',
-    'Малыженкова Юлия Дмитриевна'
+    'Малыженкова Юлия Дмитриевна',
 ];
 
 export const ROUTES_DATA_MAP = {
@@ -52,134 +58,142 @@ export const ROUTES_DATA_MAP = {
     [routerPaths.courses]: coursesList,
     [routerPaths.modules]: modulesList,
     [routerPaths.topics]: topicsList,
-    [routerPaths.teachers]: teachersList
-}
+    [routerPaths.teachers]: teachersList,
+};
+
+export const ROUTES_DATA_FETCH = {
+    [routerPaths.disciplines]: SUBJECTS,
+    [routerPaths.courses]: GET_COURSES,
+    [routerPaths.modules]: GET_MODULES,
+    [routerPaths.topics]: GET_TOPICS,
+    [routerPaths.teachers]: TUTORS,
+};
 
 export const ROUTES_NESTED_RENDER_PATH_MAP = {
     [routerPaths.disciplines]: routerPaths.courses,
     [routerPaths.courses]: routerPaths.modules,
     [routerPaths.modules]: routerPaths.topics,
-    [routerPaths.teachers]: undefined
-}
+    [routerPaths.teachers]: undefined,
+};
 
 export const TAB_LABEL_PATH_MAP = {
     [routerPaths.disciplines]: {
         label: 'Дисциплины',
         value: routerPaths.disciplines,
-        to: routerPaths.disciplines
+        to: routerPaths.disciplines,
     },
     [routerPaths.courses]: {
         label: 'Курсы',
         value: routerPaths.courses,
-        to: routerPaths.courses
+        to: routerPaths.courses,
     },
     [routerPaths.modules]: {
         label: 'Модули',
         value: routerPaths.modules,
-        to: routerPaths.modules
+        to: routerPaths.modules,
     },
     [routerPaths.topics]: {
         label: 'Темы',
         value: routerPaths.topics,
-        to: routerPaths.topics
+        to: routerPaths.topics,
     },
-}
+};
 
 export const CREATE_FIELDS_MAP = {
     [routerPaths.disciplines]: [
         {
             name: 'title',
-            label: 'Название'
+            label: 'Название',
         },
         {
             name: 'goal',
             label: 'Цель освоения',
-            isTextArea: true
+            isTextArea: true,
         },
         {
             name: 'description',
             label: 'Описание',
-            isTextArea: true
+            isTextArea: true,
         },
         {
             name: 'result',
             label: 'Результаты',
-            isTextArea: true
+            isTextArea: true,
         },
         {
             name: 'author',
-            label: 'Авторы'
+            label: 'Авторы',
         },
     ],
     [routerPaths.courses]: [
         {
             name: 'id',
-            label: 'Идентификатор (код курса)'
+            label: 'Идентификатор (код курса)',
         },
         {
             name: 'title',
-            label: 'Название'
+            label: 'Название',
         },
         {
             name: 'description',
             label: 'Краткое описание',
-            isTextArea: true
+            isTextArea: true,
         },
         {
             name: 'release',
-            label: 'Сроки реализации'
+            label: 'Сроки реализации',
         },
         {
             name: 'elements',
-            label: 'Элементы контроля (и критерии успешного освоения)'
+            label: 'Элементы контроля (и критерии успешного освоения)',
         },
         {
             name: 'author',
-            label: 'Авторы (преподаватели)'
+            label: 'Авторы (преподаватели)',
         },
     ],
     [routerPaths.modules]: [
         {
             name: 'id',
-            label: 'Идентификатор (код модуля)'
+            label: 'Идентификатор (код модуля)',
         },
         {
             name: 'title',
-            label: 'Название'
+            label: 'Название',
         },
         {
             name: 'release',
-            label: 'Сроки реализации'
+            label: 'Сроки реализации',
         },
         {
             name: 'author',
-            label: 'Авторы (преподаватели)'
+            label: 'Авторы (преподаватели)',
         },
     ],
     [routerPaths.topics]: [
         {
             name: 'title',
-            label: 'Название'
+            label: 'Название',
         },
         {
             name: 'description',
             label: 'Содержание (описание)',
-            isTextArea: true
+            isTextArea: true,
         },
         {
             name: 'files',
             label: 'Файлы',
-            hasAttach: true
-        }
+            hasAttach: true,
+        },
     ],
     [routerPaths.teachers]: [
         {
             name: 'firstName',
-            label: 'Имя (имя + отчество)'
+            label: 'Имя (имя + отчество)',
         },
         {
             name: 'lastName',
-            label: 'Фамилия'
+            label: 'Фамилия',
         },
         {
             name: 'faculty',
@@ -192,11 +206,11 @@ export const CREATE_FIELDS_MAP = {
         {
             name: 'password',
             label: 'Пароль',
-            type: 'password'
+            type: 'password',
         },
         {
             name: 'email',
             label: 'Адрес электронной почты',
         },
-    ]
-}
+    ],
+};

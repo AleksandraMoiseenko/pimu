@@ -1,62 +1,108 @@
-import {Button, FormControl, Grid, TextField} from "@mui/material";
-import {useState} from "react";
-import {useLocation} from "react-router-dom";
-import {CREATE_FIELDS_MAP} from "../const";
+import { Button, FormControl, Grid, TextField } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { api } from '../api/client';
+import { CREATE_FIELDS_MAP } from '../const';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
+import { PostUriManager, PutUriManager } from '../helpers';
 
-export const Attach = (props: any) => {
-    return <>
-        <span>{props.field.label}</span>
-        <Button
-            variant="contained"
-            component="label"
-            color='secondary'
-        >
-            Прикрепить файл
-            <input
-                type="file"
-                hidden
+export const AttachFile = (props: any) => {
+    return (
+        <>
+            <span>{props.field.label}</span>
+            <Button variant="contained" component="label" color="secondary">
+                Прикрепить файл
+                <input type="file" hidden />
+            </Button>
+        </>
+    );
+};
+
+export const TextArea = (props: any) => {
+    return (
+        <>
+            {props.field.label}
+            <TextareaAutosize
+                name={props.field.name}
+                placeholder={props.field.label}
+                defaultValue={props.value}
+                onChange={props.handleChange}
+                minRows={3}
             />
-        </Button>
-    </>
-}
-
-const TextArea = (props: any) => {
-    return <>
-        {props.field.label}
-        <TextareaAutosize
-            placeholder={props.field.label}
-            minRows={3}
-        />
-    </>
-}
+        </>
+    );
+};
 
 export const CreatePage = () => {
     let location: any = useLocation();
+    let navigate = useNavigate();
+    let path = location.pathname;
 
-    const [formData] = useState({});
+    const [formData, setFormData] = useState({});
 
-    return <Grid display={'grid'} gridTemplateColumns={'1fr'} padding={'36px 30vw'} gap={3}>
-        {CREATE_FIELDS_MAP[location.state.from].map(f => {
-            if (f.hasAttach) return <Attach field={f}/>
-            if (f.isTextArea) return <TextArea field={f}/>
-            return <FormControl>
-                <TextField
-                    name={f.name}
-                    label={f.label}
-                    defaultValue=""
-                    type={f.type}
-                />
-            </FormControl>
-        })}
-            <FormControl sx={{mt: 4}}>
-            <Button
-            variant="contained"
-            color="primary"
-            type="submit"
-            >
-            Создать
-            </Button>
-            </FormControl>
-            </Grid>
+    const { item, from, isEditing } = location.state;
+    const fields = CREATE_FIELDS_MAP[from];
+
+    useEffect(() => {
+        let form: any = {};
+
+        for (const key of fields) {
+            form[key.name] = item[key.name];
         }
+        setFormData(form);
+    }, []);
+
+    const handleChange = (e: any) => {
+        const { name, value } = e.target;
+
+        setFormData((prevState) => ({
+            ...prevState,
+            [name]: value,
+        }));
+    };
+
+    return (
+        <Grid display={'grid'} gridTemplateColumns={'1fr'} padding={'36px 30vw'} gap={3}>
+            {fields.map((field: any) => {
+                if (field.hasAttach) return <AttachFile field={field} />;
+                if (field.isTextArea)
+                    return (
+                        <TextArea
+                            field={field}
+                            value={item[field.name]}
+                            handleChange={handleChange}
+                        />
+                    );
+                return (
+                    <FormControl>
+                        <TextField
+                            onChange={handleChange}
+                            name={field.name}
+                            label={field.label}
+                            defaultValue={item[field.name]}
+                            type={field.type}
+                        />
+                    </FormControl>
+                );
+            })}
+            <FormControl sx={{ mt: 4 }}>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    type="submit"
+                    onClick={() => {
+                        if (isEditing) {
+                            return api.put(PutUriManager[from], formData).then((data) => {
+                                navigate(from);
+                            });
+                        }
+
+                        return api.post(PostUriManager[from], formData);
+                    }}
+                >
+                    {isEditing ? 'Сохранить' : 'Создать'}
+                </Button>
+            </FormControl>
+        </Grid>
+    );
+};

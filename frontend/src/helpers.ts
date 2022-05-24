@@ -1,5 +1,6 @@
 import { routerPaths } from './const';
 import {
+    COURSES,
     DELETE_COURSE,
     DELETE_MODULE,
     DELETE_SUBJECT,
@@ -8,7 +9,9 @@ import {
     GET_COURSES,
     GET_MODULES,
     GET_TOPICS,
+    MODULES,
     SUBJECTS,
+    TOPICS,
     TUTORS,
 } from './urls';
 
@@ -45,12 +48,30 @@ export const DeleteUriManager = {
     [routerPaths.teachers]: DELETE_TUTOR,
 };
 
+export const PutUriManager = {
+    [routerPaths.disciplines]: SUBJECTS,
+    [routerPaths.courses]: COURSES,
+    [routerPaths.modules]: MODULES,
+    [routerPaths.topics]: TOPICS,
+    [routerPaths.teachers]: TUTORS,
+};
+
+export const PostUriManager = {
+    [routerPaths.disciplines]: SUBJECTS,
+    [routerPaths.courses]: COURSES,
+    [routerPaths.modules]: MODULES,
+    [routerPaths.topics]: TOPICS,
+    [routerPaths.teachers]: TUTORS,
+};
+
 export class UrlBuilder {
     _url;
+
     constructor() {
         this._url = '';
     }
-    build(url: string, param = '') {
+
+    build(url: string = '', param = '') {
         this._url = this._url + url.replace(/\{(.+?)\}/g, param);
         return this;
     }

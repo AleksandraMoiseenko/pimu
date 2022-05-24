@@ -1,5 +1,4 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
-// https://jsonplaceholder.typicode.com http://localhost:8080
 
 const config: AxiosRequestConfig = {
     baseURL: 'http://localhost:8080',

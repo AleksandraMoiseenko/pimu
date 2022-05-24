@@ -102,11 +102,11 @@ export const TAB_LABEL_PATH_MAP = {
 export const CREATE_FIELDS_MAP = {
     [routerPaths.disciplines]: [
         {
-            name: 'title',
+            name: 'name',
             label: 'Название',
         },
         {
-            name: 'goal',
+            name: 'purpose',
             label: 'Цель освоения',
             isTextArea: true,
         },
@@ -121,7 +121,7 @@ export const CREATE_FIELDS_MAP = {
             isTextArea: true,
         },
         {
-            name: 'author',
+            name: 'authors',
             label: 'Авторы',
         },
     ],
@@ -131,7 +131,7 @@ export const CREATE_FIELDS_MAP = {
             label: 'Идентификатор (код курса)',
         },
         {
-            name: 'title',
+            name: 'name',
             label: 'Название',
         },
         {
@@ -140,15 +140,15 @@ export const CREATE_FIELDS_MAP = {
             isTextArea: true,
         },
         {
-            name: 'release',
+            name: 'endDate',
             label: 'Сроки реализации',
         },
         {
-            name: 'elements',
+            name: 'passCriteriaDescription',
             label: 'Элементы контроля (и критерии успешного освоения)',
         },
         {
-            name: 'author',
+            name: 'tutors',
             label: 'Авторы (преподаватели)',
         },
     ],
@@ -158,21 +158,21 @@ export const CREATE_FIELDS_MAP = {
             label: 'Идентификатор (код модуля)',
         },
         {
-            name: 'title',
+            name: 'name',
             label: 'Название',
         },
         {
-            name: 'release',
+            name: 'endDate',
             label: 'Сроки реализации',
         },
         {
-            name: 'author',
+            name: 'tutors',
             label: 'Авторы (преподаватели)',
         },
     ],
     [routerPaths.topics]: [
         {
-            name: 'title',
+            name: 'name',
             label: 'Название',
         },
         {
@@ -188,19 +188,19 @@ export const CREATE_FIELDS_MAP = {
     ],
     [routerPaths.teachers]: [
         {
-            name: 'firstName',
+            name: 'firstname',
             label: 'Имя (имя + отчество)',
         },
         {
-            name: 'lastName',
+            name: 'lastname',
             label: 'Фамилия',
         },
         {
-            name: 'faculty',
+            name: 'department',
             label: 'Факультет',
         },
         {
-            name: 'login',
+            name: 'username',
             label: 'Логин',
         },
         {

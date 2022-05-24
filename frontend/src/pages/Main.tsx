@@ -24,7 +24,7 @@ const renderDeleteIcon = (path: string, item: any, data: any, setData: any) =>
             onClick={(e) => {
                 e.stopPropagation();
 
-                const url = UrlBuilder.build(DeleteUriManager[path], item.id).url;
+                const url = new UrlBuilder().build(DeleteUriManager[path], item.id).url;
                 api.delete(url).then((response) => {
                     setData(CrudManager.delete(data, item.id));
                     return response;
@@ -67,7 +67,8 @@ export const Main = () => {
             setOpenId(initOpenId);
         }
 
-        const url = UrlBuilder.build(FetchUriManager[path], openId)
+        const url = new UrlBuilder()
+            .build(FetchUriManager[path], openId)
             .build(PAGE_PARAM, String(page - 1))
             .build(SIZE_PARAM, String(dataPerPage)).url;
 
@@ -78,7 +79,8 @@ export const Main = () => {
     }, [location]);
 
     const handleChange = (event: ChangeEvent<unknown>, value: number) => {
-        const url = UrlBuilder.build(FetchUriManager[path], openId)
+        const url = new UrlBuilder()
+            .build(FetchUriManager[path], openId)
             .build(PAGE_PARAM, String(value - 1))
             .build(SIZE_PARAM, String(dataPerPage)).url;
 

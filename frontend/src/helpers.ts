@@ -45,13 +45,17 @@ export const DeleteUriManager = {
     [routerPaths.teachers]: DELETE_TUTOR,
 };
 
-export const UrlBuilder = {
-    _url: '',
-    build: function (url: string, param = '') {
+export class UrlBuilder {
+    _url;
+    constructor() {
+        this._url = '';
+    }
+    build(url: string, param = '') {
         this._url = this._url + url.replace(/\{(.+?)\}/g, param);
         return this;
-    },
+    }
+
     get url() {
         return this._url;
-    },
-};
+    }
+}

@@ -98,11 +98,13 @@ export function Layout() {
             >
                 <AddIcon />
             </Fab>
-            <Link to="/tutors.csv" target="_blank" download>
-                <Fab color="primary" aria-label="add" sx={fabStyleAddTeacher}>
-                    <FileDownloadIcon />
-                </Fab>
-            </Link>
+            {path === routerPaths.teachers && (
+                <Link to="/tutors.csv" target="_blank" download>
+                    <Fab color="primary" aria-label="add" sx={fabStyleAddTeacher}>
+                        <FileDownloadIcon />
+                    </Fab>
+                </Link>
+            )}
         </>
     );
 }

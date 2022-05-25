@@ -64,6 +64,7 @@ export const CreatePage = () => {
     return (
         <Grid display={'grid'} gridTemplateColumns={'1fr'} padding={'36px 30vw'} gap={3}>
             {fields.map((field: any) => {
+                if (!field.label) return;
                 if (field.hasAttach) return <AttachFile field={field} />;
                 if (field.isTextArea)
                     return (

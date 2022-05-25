@@ -17,49 +17,6 @@ import { routerPaths, ROUTES_NESTED_RENDER_PATH_MAP } from '../const';
 import { CrudManager, DeleteUriManager, FetchUriManager, UrlBuilder } from '../helpers';
 import { PAGE_PARAM, SIZE_PARAM } from '../urls';
 
-const o = [
-    {
-        id: 1,
-        name: 'Нервная система',
-        purpose: 'Изучить болезни нервной системы',
-        description: 'В рамках данного курса будут изучены заболевания нервной системы',
-        result: 'Сможете лечить людей',
-        authors: 'Иванов Иван Иванович',
-    },
-    {
-        id: 2,
-        name: 'Нервная система1',
-        purpose: 'Изучить болезни нервной системы',
-        description: 'В рамках данного курса будут изучены заболевания нервной системы',
-        result: 'Сможете лечить людей',
-        authors: 'Иванов Иван Иванович',
-    },
-    {
-        id: 3,
-        name: 'Нервная система2',
-        purpose: 'Изучить болезни нервной системы',
-        description: 'В рамках данного курса будут изучены заболевания нервной системы',
-        result: 'Сможете лечить людей',
-        authors: 'Иванов Иван Иванович',
-    },
-    {
-        id: 4,
-        name: 'Нервная система3',
-        purpose: 'Изучить болезни нервной системы',
-        description: 'В рамках данного курса будут изучены заболевания нервной системы',
-        result: 'Сможете лечить людей',
-        authors: 'Иванов Иван Иванович',
-    },
-    {
-        id: 5,
-        name: 'Нервная система4',
-        purpose: 'Изучить болезни нервной системы',
-        description: 'В рамках данного курса будут изучены заболевания нервной системы',
-        result: 'Сможете лечить людей',
-        authors: 'Иванов Иван Иванович',
-    },
-];
-
 const renderDeleteIcon = (path: string, item: any, data: any, setData: any) =>
     [routerPaths.root, routerPaths.teachers].includes(path) ? null : (
         <IconButton
@@ -88,6 +45,7 @@ const renderDownloadIcon = (path: string) =>
     );
 
 export const Main = () => {
+    let initData: any[] = [];
     let initPage = 1;
     let initOpenId = '';
     let initPageCount = 0;
@@ -96,7 +54,7 @@ export const Main = () => {
     let location = useLocation();
     let path = location.pathname;
 
-    const [data, setData] = useState<any>(o);
+    const [data, setData] = useState<any[]>(initData);
     const [page, setPage] = useState(initPage);
     const [pageCount, setPageCount] = useState(initPageCount);
     const [openId, setOpenId] = useState(initOpenId);

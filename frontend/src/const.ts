@@ -102,6 +102,9 @@ export const TAB_LABEL_PATH_MAP = {
 export const CREATE_FIELDS_MAP = {
     [routerPaths.disciplines]: [
         {
+            name: 'id',
+        },
+        {
             name: 'name',
             label: 'Название',
         },
@@ -172,6 +175,9 @@ export const CREATE_FIELDS_MAP = {
     ],
     [routerPaths.topics]: [
         {
+            name: 'id',
+        },
+        {
             name: 'name',
             label: 'Название',
         },
@@ -187,6 +193,9 @@ export const CREATE_FIELDS_MAP = {
         },
     ],
     [routerPaths.teachers]: [
+        {
+            name: 'id',
+        },
         {
             name: 'firstname',
             label: 'Имя (имя + отчество)',

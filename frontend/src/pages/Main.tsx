@@ -22,14 +22,16 @@ const downloadMbzArchive = (itemId: any) => {
 
     api.get(url, {
         responseType: 'blob',
-        headers: {
-            Accept: 'application/zip',
-        },
+        // headers: {
+        //     Accept: 'application/zip',
+        // },
     }).then((response: any) => {
+        const filename = response.headers.get('Content-Disposition').split('filename=')[1];
+
         const url = window.URL.createObjectURL(new Blob([response]));
         const link = document.createElement('a');
         link.href = url;
-        link.setAttribute('download', `moodle.mbz`);
+        link.setAttribute('download', filename);
         document.body.appendChild(link);
         link.click();
         link.remove();

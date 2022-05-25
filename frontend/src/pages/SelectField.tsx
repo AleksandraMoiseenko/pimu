@@ -19,7 +19,12 @@ const MenuProps = {
     },
 };
 
-export function SelectField({ field, tutors = [], selectedTutorsIds, setSelectedTutorsIds }: any) {
+export function SelectField({
+    field,
+    tutors = [],
+    selectedTutorsIds = [],
+    setSelectedTutorsIds,
+}: any) {
     const handleRoleChange = (event: any) => {
         const { value } = event.target;
         setSelectedTutorsIds(value);

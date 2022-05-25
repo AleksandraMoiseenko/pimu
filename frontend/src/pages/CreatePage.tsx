@@ -57,7 +57,12 @@ export const CreatePage = () => {
         }
 
         setFormData(form);
-        if (form.tutors.length > 0) setTutors(form.tutors);
+        if (form.tutors.length > 0) {
+            setTutors(form.tutors);
+
+            const tutorsIds = form.tutors.map((tutor) => tutor.id);
+            setSelectedTutorsIds(tutorsIds);
+        }
     }, []);
 
     useEffect(() => {

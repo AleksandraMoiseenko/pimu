@@ -122,13 +122,18 @@ export const CreatePage = () => {
                     color="primary"
                     type="button"
                     onClick={() => {
+                        const selectedTutors = selectedTutorsIds.map((ids) => {
+                            return tutors.find((tutor) => tutor.id === ids);
+                        });
+                        const enhancedFormData = { ...formData, selectedTutors };
+
                         if (isEditing) {
-                            return api.put(PutUriManager[from], formData).then((data) => {
+                            return api.put(PutUriManager[from], enhancedFormData).then((data) => {
                                 navigate(from);
                             });
                         }
 
-                        return api.post(PostUriManager[from], formData);
+                        return api.post(PostUriManager[from], enhancedFormData);
                     }}
                 >
                     {isEditing ? 'Сохранить' : 'Создать'}

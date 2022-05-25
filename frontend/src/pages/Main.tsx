@@ -26,7 +26,8 @@ const downloadMbzArchive = (itemId: any) => {
         //     Accept: 'application/zip',
         // },
     }).then((response: any) => {
-        const filename = response.headers.get('Content-Disposition').split('filename=')[1];
+        console.log(response.headers, 'headers');
+        const filename = 'moodle.mbz'; //response.headers.get('Content-Disposition').split('filename=')[1];
 
         const url = window.URL.createObjectURL(new Blob([response]));
         const link = document.createElement('a');

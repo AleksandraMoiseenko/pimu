@@ -60,7 +60,7 @@ export const CreatePage = () => {
 
     useEffect(() => {
         api.get(TUTORS).then((tutorsData: any) => {
-            setTutors(tutorsData);
+            setTutors(tutorsData.data);
         });
     }, []);
 

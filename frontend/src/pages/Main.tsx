@@ -21,7 +21,7 @@ const downloadMbzArchive = (itemId: any) => {
     const url = new UrlBuilder().build(DOWNLOAD_COURSE, String(itemId)).url;
 
     api.get(url, {
-        // responseType: 'blob',
+        responseType: 'blob',
         // headers: {
         //     Accept: 'application/zip',
         // },

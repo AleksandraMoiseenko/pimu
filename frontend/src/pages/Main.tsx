@@ -26,13 +26,13 @@ const downloadMbzArchive = (itemId: any) => {
             Accept: 'application/zip',
         },
     }).then((response: any) => {
-        response.blob().then((blob: Blob) => {
-            let url = window.URL.createObjectURL(blob);
-            let a = document.createElement('a');
-            a.href = url;
-            a.download = 'course.mbz';
-            a.click();
-        });
+        const url = window.URL.createObjectURL(new Blob([response]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', `moodle.mbz`);
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
     });
 };
 

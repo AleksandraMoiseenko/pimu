@@ -1,10 +1,13 @@
 import { Button, FormControl, Grid, TextField } from '@mui/material';
+import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { api } from '../api/client';
 import { CREATE_FIELDS_MAP } from '../const';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import { PostUriManager, PutUriManager } from '../helpers';
+import { TUTORS } from '../urls';
+import { SelectField } from './SelectField';
 
 export const AttachFile = (props: any) => {
     return (
@@ -40,6 +43,9 @@ export const CreatePage = () => {
 
     const [formData, setFormData] = useState({});
 
+    const [tutors, setTutors] = React.useState<any[]>([]);
+    const [selectedTutorsIds, setSelectedTutorsIds] = React.useState<any[]>([]);
+
     const { item, from, isEditing } = location.state;
     const fields = CREATE_FIELDS_MAP[from];
 
@@ -50,6 +56,12 @@ export const CreatePage = () => {
             form[key.name] = (item && item[key.name]) || '';
         }
         setFormData(form);
+    }, []);
+
+    useEffect(() => {
+        api.get(TUTORS).then((tutorsData: any) => {
+            setTutors(tutorsData);
+        });
     }, []);
 
     const handleChange = (e: any) => {
@@ -65,6 +77,15 @@ export const CreatePage = () => {
         <Grid display={'grid'} gridTemplateColumns={'1fr'} padding={'36px 30vw'} gap={3}>
             {fields.map((field: any) => {
                 if (!field.label) return;
+                if (field.isSelect)
+                    return (
+                        <SelectField
+                            tutors={tutors}
+                            selectedTutorsIds={selectedTutorsIds}
+                            setSelectedTutorsIds={setSelectedTutorsIds}
+                            field={field}
+                        />
+                    );
                 if (field.hasAttach) return <AttachFile field={field} />;
                 if (field.isTextArea)
                     return (

@@ -157,6 +157,7 @@ export const CREATE_FIELDS_MAP = {
         {
             name: 'tutors',
             label: 'Авторы (преподаватели)',
+            isSelect: true,
         },
     ],
     [routerPaths.modules]: [
@@ -179,6 +180,7 @@ export const CREATE_FIELDS_MAP = {
         {
             name: 'tutors',
             label: 'Авторы (преподаватели)',
+            isSelect: true,
         },
     ],
     [routerPaths.topics]: [

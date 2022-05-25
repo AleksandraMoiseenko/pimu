@@ -70,7 +70,7 @@ export const Main = () => {
 
         const url = new UrlBuilder()
             .build(FetchUriManager[path], openId)
-            .build(PAGE_PARAM, String(page - 1))
+            .build(PAGE_PARAM, String(initPage - 1))
             .build(SIZE_PARAM, String(dataPerPage)).url;
 
         api.get(url).then((data: any) => {

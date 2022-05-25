@@ -20,7 +20,12 @@ import { DOWNLOAD_COURSE, PAGE_PARAM, SIZE_PARAM } from '../urls';
 const downloadMbzArchive = (itemId: any) => {
     const url = new UrlBuilder().build(DOWNLOAD_COURSE, String(itemId)).url;
 
-    api.get(url).then((response: any) => {
+    api.get(url, {
+        responseType: 'blob',
+        headers: {
+            Accept: 'application/zip',
+        },
+    }).then((response: any) => {
         response.blob().then((blob: Blob) => {
             let url = window.URL.createObjectURL(blob);
             let a = document.createElement('a');

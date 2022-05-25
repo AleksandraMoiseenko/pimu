@@ -143,8 +143,12 @@ export const CREATE_FIELDS_MAP = {
             isTextArea: true,
         },
         {
+            name: 'startDate',
+            label: 'Дата начала',
+        },
+        {
             name: 'endDate',
-            label: 'Сроки реализации',
+            label: 'Дата конца',
         },
         {
             name: 'passCriteriaDescription',
@@ -165,8 +169,12 @@ export const CREATE_FIELDS_MAP = {
             label: 'Название',
         },
         {
+            name: 'startDate',
+            label: 'Дата начала',
+        },
+        {
             name: 'endDate',
-            label: 'Сроки реализации',
+            label: 'Дата конца',
         },
         {
             name: 'tutors',

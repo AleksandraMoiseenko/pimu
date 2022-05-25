@@ -18,7 +18,7 @@ import { CrudManager, DeleteUriManager, FetchUriManager, UrlBuilder } from '../h
 import { PAGE_PARAM, SIZE_PARAM } from '../urls';
 
 const renderDeleteIcon = (path: string, item: any, data: any, setData: any) =>
-    [routerPaths.root, routerPaths.teachers].includes(path) ? null : (
+    [routerPaths.root].includes(path) ? null : (
         <IconButton
             edge="end"
             onClick={(e) => {
@@ -36,13 +36,13 @@ const renderDeleteIcon = (path: string, item: any, data: any, setData: any) =>
     );
 
 const renderDownloadIcon = (path: string) =>
-    [routerPaths.disciplines, routerPaths.teachers].includes(path) ? null : (
+    [routerPaths.courses].includes(path) ? (
         <ListItemIcon>
             <IconButton edge="end" onClick={(e) => e.stopPropagation()}>
                 <FileDownloadIcon />
             </IconButton>
         </ListItemIcon>
-    );
+    ) : null;
 
 export const Main = () => {
     let initData: any[] = [];

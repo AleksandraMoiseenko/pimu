@@ -130,7 +130,7 @@ export const CREATE_FIELDS_MAP = {
     ],
     [routerPaths.courses]: [
         {
-            name: 'id',
+            name: 'code',
             label: 'Идентификатор (код курса)',
         },
         {
@@ -161,7 +161,7 @@ export const CREATE_FIELDS_MAP = {
     ],
     [routerPaths.modules]: [
         {
-            name: 'id',
+            name: 'code',
             label: 'Идентификатор (код модуля)',
         },
         {

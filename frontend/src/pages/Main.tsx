@@ -15,7 +15,21 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { api } from '../api/client';
 import { routerPaths, ROUTES_NESTED_RENDER_PATH_MAP } from '../const';
 import { CrudManager, DeleteUriManager, FetchUriManager, UrlBuilder } from '../helpers';
-import { PAGE_PARAM, SIZE_PARAM } from '../urls';
+import { DOWNLOAD_COURSE, PAGE_PARAM, SIZE_PARAM } from '../urls';
+
+const downloadMbzArchive = (itemId: any) => {
+    const url = new UrlBuilder().build(DOWNLOAD_COURSE, String(itemId)).url;
+
+    api.get(url).then((response: any) => {
+        response.blob().then((blob: Blob) => {
+            let url = window.URL.createObjectURL(blob);
+            let a = document.createElement('a');
+            a.href = url;
+            a.download = 'course.mbz';
+            a.click();
+        });
+    });
+};
 
 const renderDeleteIcon = (path: string, item: any, data: any, setData: any) =>
     [routerPaths.root].includes(path) ? null : (
@@ -35,10 +49,16 @@ const renderDeleteIcon = (path: string, item: any, data: any, setData: any) =>
         </IconButton>
     );
 
-const renderDownloadIcon = (path: string) =>
+const renderDownloadIcon = (path: string, item: any) =>
     [routerPaths.courses].includes(path) ? (
         <ListItemIcon>
-            <IconButton edge="end" onClick={(e) => e.stopPropagation()}>
+            <IconButton
+                edge="end"
+                onClick={(e) => {
+                    e.stopPropagation();
+                    downloadMbzArchive(item.id);
+                }}
+            >
                 <FileDownloadIcon />
             </IconButton>
         </ListItemIcon>
@@ -106,7 +126,7 @@ export const Main = () => {
                                         setOpenId(item.id);
                                     }}
                                 >
-                                    {renderDownloadIcon(path)}
+                                    {renderDownloadIcon(path, item)}
                                     <ListItemText
                                         sx={{
                                             maxWidth: 350,

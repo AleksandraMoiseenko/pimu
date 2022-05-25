@@ -55,10 +55,14 @@ export const CreatePage = () => {
         for (const key of fields) {
             form[key.name] = (item && item[key.name]) || '';
         }
+
         setFormData(form);
+        if (form.tutors.length > 0) setTutors(form.tutors);
     }, []);
 
     useEffect(() => {
+        if (isEditing) return;
+
         api.get(TUTORS).then((tutorsData: any) => {
             setTutors(tutorsData.data);
         });

@@ -125,7 +125,7 @@ export const CreatePage = () => {
                         const selectedTutors = selectedTutorsIds.map((ids) => {
                             return tutors.find((tutor) => tutor.id === ids);
                         });
-                        const enhancedFormData = { ...formData, selectedTutors };
+                        const enhancedFormData = { ...formData, tutors: selectedTutors };
 
                         if (isEditing) {
                             return api.put(PutUriManager[from], enhancedFormData).then((data) => {

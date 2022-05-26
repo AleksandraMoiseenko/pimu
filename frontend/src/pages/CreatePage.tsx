@@ -241,7 +241,7 @@ export const CreatePage = () => {
                             });
                         }
 
-                        return api.post(PostUriManager[from], enhancedFormData).then((data) => {
+                        return api.post(PostUriManager[from], enhancedFormData).then(({ data }) => {
                             return sendAttachFiles(data.id).then((_) => navigateAfterChanges());
                         });
                     }}

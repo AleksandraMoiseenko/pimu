@@ -21,7 +21,7 @@ import { saveAs } from 'file-saver';
 
 const downloadMbzArchive = (itemId: any) => {
     const url = new UrlBuilder().build(DOWNLOAD_COURSE, String(itemId)).url;
-    api.get(url).then((response) => saveAs(response, 'moodle.mbz'));
+    saveAs(`http://localhost:8080${url}`, 'moodle.mbz');
 };
 
 const renderDeleteIcon = (path: string, item: any, data: any, setData: any) =>

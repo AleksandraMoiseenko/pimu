@@ -3,7 +3,7 @@ import { Button, FormControl, Grid, IconButton, TextField } from '@mui/material'
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { api } from '../api/client';
+import { api, baseURL } from '../api/client';
 import { CREATE_FIELDS_MAP, routerPaths } from '../const';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import { PostUriManager, PutUriManager, UrlBuilder } from '../helpers';
@@ -132,7 +132,7 @@ export const CreatePage = () => {
                                     item.id,
                                 ).url;
 
-                                saveAs(`http://localhost:8080${url}`, 'tutors.csv');
+                                saveAs(`${baseURL}${url}`, 'tutors.csv');
                             }}
                         >
                             <FileDownloadIcon />

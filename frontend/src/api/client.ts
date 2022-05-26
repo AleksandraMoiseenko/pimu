@@ -1,7 +1,9 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 
+export const baseURL = 'http://localhost:8080';
+
 const config: AxiosRequestConfig = {
-    baseURL: 'http://localhost:8080',
+    baseURL,
     responseType: 'json',
     timeout: 0,
     headers: {

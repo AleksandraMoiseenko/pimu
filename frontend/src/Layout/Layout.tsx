@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Fab } from '@mui/material';
 import { Link, matchPath, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { baseURL } from '../api/client';
 import { routerPaths, TAB_LABEL_PATH_MAP } from '../const';
 import { UrlBuilder } from '../helpers';
 import { EXPORT_TUTORS } from '../urls';
@@ -109,7 +110,7 @@ export function Layout() {
                     sx={fabStyleAddTeacher}
                     onClick={(e: any) => {
                         const url = new UrlBuilder().build(EXPORT_TUTORS).url;
-                        saveAs(`http://localhost:8080${url}`, 'tutors_list.csv');
+                        saveAs(`${baseURL}${url}`, 'tutors_list.csv');
                     }}
                 >
                     <FileDownloadIcon />

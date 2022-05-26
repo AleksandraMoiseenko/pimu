@@ -16,11 +16,12 @@ import { api } from '../api/client';
 import { routerPaths, ROUTES_NESTED_RENDER_PATH_MAP } from '../const';
 import { CrudManager, DeleteUriManager, FetchUriManager, UrlBuilder } from '../helpers';
 import { DOWNLOAD_COURSE, PAGE_PARAM, SIZE_PARAM } from '../urls';
+// @ts-ignore
 import { saveAs } from 'file-saver';
 
 const downloadMbzArchive = (itemId: any) => {
     const url = new UrlBuilder().build(DOWNLOAD_COURSE, String(itemId)).url;
-    saveAs(url, 'moodle.mbz');
+    api.get(url).then((response) => saveAs(url, 'moodle.mbz'));
 };
 
 const renderDeleteIcon = (path: string, item: any, data: any, setData: any) =>

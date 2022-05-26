@@ -9,6 +9,7 @@ import TextareaAutosize from '@mui/material/TextareaAutosize';
 import { PostUriManager, PutUriManager, UrlBuilder } from '../helpers';
 import { EXPORT_COURSE_TUTORS, TUTORS } from '../urls';
 import { SelectField } from './SelectField';
+// @ts-ignore
 import { saveAs } from 'file-saver';
 
 export const AttachFile = (props: any) => {
@@ -62,7 +63,7 @@ export const CreatePage = () => {
         if ('tutors' in form && form.tutors.length > 0) {
             setTutors(form.tutors);
 
-            const tutorsIds = form.tutors.map((tutor) => tutor.id);
+            const tutorsIds = form.tutors.map((tutor: any) => tutor.id);
             setSelectedTutorsIds(tutorsIds);
         }
     }, []);

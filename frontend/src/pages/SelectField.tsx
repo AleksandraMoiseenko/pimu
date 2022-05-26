@@ -44,8 +44,8 @@ export function SelectField({
                             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
                                 {selected.map((tutorId: any) => {
                                     const chipText = `${
-                                        tutors.find((t) => t.id === tutorId)?.firstname
-                                    } ${tutors.find((t) => t.id === tutorId)?.lastname}`;
+                                        tutors.find((t: any) => t.id === tutorId)?.firstname
+                                    } ${tutors.find((t: any) => t.id === tutorId)?.lastname}`;
 
                                     return (
                                         <Chip variant="outlined" key={tutorId} label={chipText} />

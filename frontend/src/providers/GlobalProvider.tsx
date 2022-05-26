@@ -13,9 +13,9 @@ export function GlobalProvider({ children }: { children: ReactNode }) {
 
     const [isAfterChanges, setIsAfterChanges] = useState(false);
 
-    const [subjectData, setSubjectData] = useState(null);
-    const [coursesData, setCoursesData] = useState(null);
-    const [modulesData, setModulesData] = useState(null);
+    const [subjectData, setSubjectData] = useState<any>(null);
+    const [coursesData, setCoursesData] = useState<any>(null);
+    const [modulesData, setModulesData] = useState<any>(null);
 
     const handleSelectedData = (itemData: any) => {
         if (path === routerPaths.disciplines) {
@@ -54,6 +54,12 @@ export function GlobalProvider({ children }: { children: ReactNode }) {
 
         isAfterChanges,
         setIsAfterChanges,
+
+        currentOpenId: {
+            [routerPaths.courses]: subjectData?.id || '',
+            [routerPaths.modules]: coursesData?.id || '',
+            [routerPaths.topics]: modulesData?.id || '',
+        },
     };
 
     return <GlobalContext.Provider value={ctx}>{children}</GlobalContext.Provider>;

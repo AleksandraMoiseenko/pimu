@@ -59,7 +59,7 @@ const renderDownloadIcon = (path: string, item: any) =>
     ) : null;
 
 export const Main = () => {
-    const { initOpenId, openId, setOpenId, resetSelectedData, handleSelectedData, isAfterChanges } =
+    const { initOpenId, openId, setOpenId, resetSelectedData, handleSelectedData, currentOpenId } =
         useGlobal();
 
     let initData: any[] = [];
@@ -78,8 +78,6 @@ export const Main = () => {
     const [dataPerPage] = useState(5);
 
     useEffect(() => {
-        if (isAfterChanges) return;
-
         setPage(initPage);
 
         if (path === routerPaths.disciplines || path === routerPaths.root) {
@@ -89,7 +87,7 @@ export const Main = () => {
         }
 
         const url = new UrlBuilder()
-            .build(FetchUriManager[path], openId)
+            .build(FetchUriManager[path], currentOpenId[path])
             .build(PAGE_PARAM, String(initPage - 1))
             .build(SIZE_PARAM, String(dataPerPage)).url;
 

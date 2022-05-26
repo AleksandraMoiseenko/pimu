@@ -15,6 +15,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { api, baseURL } from '../api/client';
 import { routerPaths, ROUTES_NESTED_RENDER_PATH_MAP } from '../const';
 import { CrudManager, DeleteUriManager, FetchUriManager, UrlBuilder } from '../helpers';
+import { useGlobal } from '../providers/GlobalProvider';
 import { DOWNLOAD_COURSE, PAGE_PARAM, SIZE_PARAM } from '../urls';
 // @ts-ignore
 import { saveAs } from 'file-saver';
@@ -58,6 +59,8 @@ const renderDownloadIcon = (path: string, item: any) =>
     ) : null;
 
 export const Main = () => {
+    const { resetSelectedData, handleSelectedData } = useGlobal();
+
     let initData: any[] = [];
     let initPage = 1;
     let initOpenId = '';
@@ -72,13 +75,15 @@ export const Main = () => {
     const [pageCount, setPageCount] = useState(initPageCount);
     const [openId, setOpenId] = useState(initOpenId);
 
-    const dataPerPage = useState(5)[0];
+    const [dataPerPage] = useState(5);
 
     useEffect(() => {
         setPage(initPage);
 
-        if (path === routerPaths.disciplines) {
+        if (path === routerPaths.disciplines || path === routerPaths.root) {
             setOpenId(initOpenId);
+
+            resetSelectedData();
         }
 
         const url = new UrlBuilder()
@@ -113,10 +118,14 @@ export const Main = () => {
                             <ListItem secondaryAction={renderDeleteIcon(path, item, data, setData)}>
                                 <ListItemButton
                                     onClick={() => {
-                                        if (ROUTES_NESTED_RENDER_PATH_MAP[path] === undefined)
+                                        if (ROUTES_NESTED_RENDER_PATH_MAP[path] === undefined) {
                                             return;
+                                        }
+
                                         navigate(ROUTES_NESTED_RENDER_PATH_MAP[path]!);
                                         setOpenId(item.id);
+
+                                        handleSelectedData(item);
                                     }}
                                 >
                                     {renderDownloadIcon(path, item)}

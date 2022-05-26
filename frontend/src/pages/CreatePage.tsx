@@ -7,6 +7,7 @@ import { api, baseURL } from '../api/client';
 import { CREATE_FIELDS_MAP, routerPaths } from '../const';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import { PostUriManager, PutUriManager, UrlBuilder } from '../helpers';
+import { useGlobal } from '../providers/GlobalProvider';
 import { EXPORT_COURSE_TUTORS, TUTORS } from '../urls';
 import { SelectField } from './SelectField';
 // @ts-ignore
@@ -40,6 +41,8 @@ export const TextArea = (props: any) => {
 };
 
 export const CreatePage = () => {
+    const { subjectData, coursesData, modulesData } = useGlobal();
+
     let location: any = useLocation();
     let navigate = useNavigate();
     let path = location.pathname;
@@ -150,7 +153,41 @@ export const CreatePage = () => {
                         const selectedTutors = selectedTutorsIds.map((ids) => {
                             return tutors.find((tutor) => tutor.id === ids);
                         });
-                        const enhancedFormData = { ...formData, tutors: selectedTutors };
+
+                        let nestedModulesData = {};
+
+                        if (from === routerPaths.topics) {
+                            nestedModulesData = {
+                                ...nestedModulesData,
+                                module: {
+                                    ...modulesData,
+                                    course: { ...coursesData, subject: subjectData },
+                                },
+                            };
+                        }
+
+                        if (from === routerPaths.modules) {
+                            nestedModulesData = {
+                                ...nestedModulesData,
+                                course: {
+                                    ...coursesData,
+                                    subject: subjectData,
+                                },
+                            };
+                        }
+
+                        if (from === routerPaths.courses) {
+                            nestedModulesData = {
+                                ...nestedModulesData,
+                                subject: subjectData,
+                            };
+                        }
+
+                        const enhancedFormData = {
+                            ...formData,
+                            tutors: selectedTutors,
+                            ...nestedModulesData,
+                        };
 
                         if (isEditing) {
                             return api.put(PutUriManager[from], enhancedFormData).then((data) => {

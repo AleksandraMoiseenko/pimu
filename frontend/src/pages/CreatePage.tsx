@@ -61,7 +61,7 @@ export const CreatePage = () => {
 
         setFormData(form);
         if ('tutors' in form && form.tutors.length > 0) {
-            setTutors(form.tutors);
+            //setTutors(form.tutors);
 
             const tutorsIds = form.tutors.map((tutor: any) => tutor.id);
             setSelectedTutorsIds(tutorsIds);

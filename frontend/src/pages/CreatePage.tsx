@@ -123,7 +123,9 @@ export const CreatePage = () => {
         const url = new UrlBuilder().build(ATTACH_TOPIC, item.id).url;
 
         for (const file of files) {
-            await api.post(url, file);
+            const formData = new FormData();
+            formData.append('file', file, file.name);
+            await api.post(url, formData);
         }
     };
 

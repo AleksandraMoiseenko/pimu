@@ -30,8 +30,6 @@ export const AttachFile = (props: any) => {
     return (
         <>
             <span>{props.field.label}</span>
-            {/*<Button variant="contained" component="label" color="secondary">*/}
-            {/*    Прикрепить файл*/}
             <Box sx={{ border: '2px solid lightgray', padding: 2 }}>
                 <label className="custom-file-upload">
                     {renderFilesList(props.files)}
@@ -47,9 +45,6 @@ export const AttachFile = (props: any) => {
                     />
                 </label>
             </Box>
-
-            {/*</Button>*/}
-            <span></span>
         </>
     );
 };

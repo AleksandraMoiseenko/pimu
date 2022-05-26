@@ -16,27 +16,11 @@ import { api } from '../api/client';
 import { routerPaths, ROUTES_NESTED_RENDER_PATH_MAP } from '../const';
 import { CrudManager, DeleteUriManager, FetchUriManager, UrlBuilder } from '../helpers';
 import { DOWNLOAD_COURSE, PAGE_PARAM, SIZE_PARAM } from '../urls';
+import { saveAs } from 'file-saver';
 
 const downloadMbzArchive = (itemId: any) => {
     const url = new UrlBuilder().build(DOWNLOAD_COURSE, String(itemId)).url;
-
-    api.get(url, {
-        responseType: 'blob',
-        // headers: {
-        //     Accept: 'application/zip',
-        // },
-    }).then((response: any) => {
-        console.log(response.headers['content-disposition'], 'headers');
-        const filename = 'moodle.mbz'; //response.headers.get('Content-Disposition').split('filename=')[1];
-
-        const url = window.URL.createObjectURL(new Blob([response]));
-        const link = document.createElement('a');
-        link.href = url;
-        link.setAttribute('download', filename);
-        document.body.appendChild(link);
-        link.click();
-        link.remove();
-    });
+    saveAs(url, 'moodle.mbz');
 };
 
 const renderDeleteIcon = (path: string, item: any, data: any, setData: any) =>

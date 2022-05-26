@@ -165,6 +165,9 @@ export const CREATE_FIELDS_MAP = {
     ],
     [routerPaths.modules]: [
         {
+            name: 'id',
+        },
+        {
             name: 'code',
             label: 'Идентификатор (код модуля)',
         },

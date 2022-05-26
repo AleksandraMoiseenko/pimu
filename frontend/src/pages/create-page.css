@@ -1,0 +1,7 @@
+.custom-file-upload  input[type='file']{
+    display: none;
+ }
+
+.custom-file-upload p {
+    margin: 0
+}

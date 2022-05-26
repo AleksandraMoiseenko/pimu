@@ -1,5 +1,5 @@
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
-import { Button, FormControl, Grid, IconButton, TextField } from '@mui/material';
+import { Box, Button, FormControl, Grid, IconButton, TextField } from '@mui/material';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -10,11 +10,12 @@ import { PostUriManager, PutUriManager, UrlBuilder } from '../helpers';
 import { useGlobal } from '../providers/GlobalProvider';
 import { ATTACH_TOPIC, EXPORT_COURSE_TUTORS, PAGE_PARAM, SIZE_PARAM, TUTORS } from '../urls';
 import { SelectField } from './SelectField';
+import './create-page.css';
 // @ts-ignore
 import { saveAs } from 'file-saver';
 
 const renderFilesList = (files: FileList) => {
-    if (!files) return <span>Нет прикрепленных файлов</span>;
+    if (!files) return <span>Выберите файлы</span>;
 
     let filesList: string[] = [];
 
@@ -29,21 +30,26 @@ export const AttachFile = (props: any) => {
     return (
         <>
             <span>{props.field.label}</span>
-            <Button variant="contained" component="label" color="secondary">
-                Прикрепить файл
-                <input
-                    multiple
-                    type="file"
-                    name="fileFld"
-                    id="fileFld"
-                    hidden
-                    onChange={(e) => {
-                        console.log(e.target.files);
-                        props.setFiles(e.target.files);
-                    }}
-                />
-            </Button>
-            <span>{renderFilesList(props.files)}</span>
+            {/*<Button variant="contained" component="label" color="secondary">*/}
+            {/*    Прикрепить файл*/}
+            <Box sx={{ border: '2px solid lightgray', padding: 2 }}>
+                <label className="custom-file-upload">
+                    {renderFilesList(props.files)}
+                    <input
+                        multiple
+                        type="file"
+                        name="fileFld"
+                        id="fileFld"
+                        onChange={(e) => {
+                            console.log(e.target.files);
+                            props.setFiles(e.target.files);
+                        }}
+                    />
+                </label>
+            </Box>
+
+            {/*</Button>*/}
+            <span></span>
         </>
     );
 };

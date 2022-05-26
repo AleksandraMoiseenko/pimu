@@ -13,6 +13,7 @@ import {
     SUBJECTS,
     TOPICS,
     TUTORS,
+    TUTORS_PAGINATION,
 } from './urls';
 
 export const CrudManager = {
@@ -37,7 +38,7 @@ export const FetchUriManager = {
     [routerPaths.courses]: GET_COURSES,
     [routerPaths.modules]: GET_MODULES,
     [routerPaths.topics]: GET_TOPICS,
-    [routerPaths.teachers]: TUTORS,
+    [routerPaths.teachers]: TUTORS_PAGINATION,
 };
 
 export const DeleteUriManager = {

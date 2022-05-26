@@ -19,6 +19,7 @@ export const DELETE_TOPIC = '/topics/{id}';
 export const ATTACH_TOPIC = '/topics/{id}/upload';
 
 export const TUTORS = '/tutors';
+export const TUTORS_PAGINATION = '/tutors/page';
 export const EXPORT_TUTORS = '/tutors/export';
 export const EXPORT_COURSE_TUTORS = '/tutors/export/course/{id}';
 export const DELETE_TUTOR = '/tutors/{id}';

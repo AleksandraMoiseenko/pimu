@@ -88,6 +88,14 @@ export const CreatePage = () => {
         }));
     };
 
+    const navigateAfterChanges = () => {
+        navigate(from, {
+            state: {
+                afterChanges: true,
+            },
+        });
+    };
+
     return (
         <Grid display={'grid'} gridTemplateColumns={'1fr'} padding={'36px 30vw'} gap={3}>
             {fields.map((field: any) => {
@@ -191,16 +199,13 @@ export const CreatePage = () => {
 
                         if (isEditing) {
                             return api.put(PutUriManager[from], enhancedFormData).then((data) => {
-                                const url = new UrlBuilder()
-                                    .build(ROUTES_DATA_FETCH[from], openId)
-                                    .build(PAGE_PARAM, '0')
-                                    .build(SIZE_PARAM, '5').url;
-
-                                navigate(url);
+                                return navigateAfterChanges();
                             });
                         }
 
-                        return api.post(PostUriManager[from], enhancedFormData);
+                        return api.post(PostUriManager[from], enhancedFormData).then((data) => {
+                            return navigateAfterChanges();
+                        });
                     }}
                 >
                     {isEditing ? 'Сохранить' : 'Создать'}

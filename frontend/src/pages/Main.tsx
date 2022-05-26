@@ -68,6 +68,7 @@ export const Main = () => {
 
     let navigate = useNavigate();
     let location = useLocation();
+    const { afterChanges } = location.state;
     let path = location.pathname;
 
     const [data, setData] = useState<any[]>(initData);
@@ -77,6 +78,8 @@ export const Main = () => {
     const [dataPerPage] = useState(5);
 
     useEffect(() => {
+        if (afterChanges) return;
+
         setPage(initPage);
 
         if (path === routerPaths.disciplines || path === routerPaths.root) {

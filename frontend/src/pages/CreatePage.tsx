@@ -120,7 +120,7 @@ export const CreatePage = () => {
     const sendAttachFiles = async () => {
         if (!files) return;
 
-        const url = new UrlBuilder().build(ATTACH_TOPIC, 'id').url;
+        const url = new UrlBuilder().build(ATTACH_TOPIC, item.id).url;
 
         for (const file of files) {
             await api.post(url, file);

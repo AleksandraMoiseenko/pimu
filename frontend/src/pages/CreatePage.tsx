@@ -132,7 +132,7 @@ export const CreatePage = () => {
                                     item.id,
                                 ).url;
 
-                                saveAs(url, 'tutors.csv');
+                                saveAs(`http://localhost:8080${url}`, 'tutors.csv');
                             }}
                         >
                             <FileDownloadIcon />

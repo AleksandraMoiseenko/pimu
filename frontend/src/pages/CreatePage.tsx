@@ -117,10 +117,13 @@ export const CreatePage = () => {
         navigate(from);
     };
 
-    const sendAttachFiles = async () => {
+    const sendAttachFiles = async (ItemId: any = undefined) => {
         if (!files) return;
 
-        const url = new UrlBuilder().build(ATTACH_TOPIC, item.id).url;
+        const url = new UrlBuilder().build(
+            ATTACH_TOPIC,
+            ItemId ? String(ItemId) : String(item.id),
+        ).url;
 
         for (const file of files) {
             const formData = new FormData();
@@ -239,7 +242,7 @@ export const CreatePage = () => {
                         }
 
                         return api.post(PostUriManager[from], enhancedFormData).then((data) => {
-                            return sendAttachFiles().then((r) => navigateAfterChanges());
+                            return sendAttachFiles(data.id).then((_) => navigateAfterChanges());
                         });
                     }}
                 >

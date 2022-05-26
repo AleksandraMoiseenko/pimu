@@ -8,10 +8,22 @@ import { CREATE_FIELDS_MAP, routerPaths, ROUTES_DATA_FETCH } from '../const';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import { PostUriManager, PutUriManager, UrlBuilder } from '../helpers';
 import { useGlobal } from '../providers/GlobalProvider';
-import { EXPORT_COURSE_TUTORS, PAGE_PARAM, SIZE_PARAM, TUTORS } from '../urls';
+import { ATTACH_TOPIC, EXPORT_COURSE_TUTORS, PAGE_PARAM, SIZE_PARAM, TUTORS } from '../urls';
 import { SelectField } from './SelectField';
 // @ts-ignore
 import { saveAs } from 'file-saver';
+
+const renderFilesList = (files: FileList) => {
+    if (!files) return <span>Нет прикрепленных файлов</span>;
+
+    let filesList: string[] = [];
+
+    for (const file of files) {
+        filesList.push(file.name);
+    }
+
+    return filesList.map((fileName) => <p>{fileName}</p>);
+};
 
 export const AttachFile = (props: any) => {
     return (
@@ -19,8 +31,19 @@ export const AttachFile = (props: any) => {
             <span>{props.field.label}</span>
             <Button variant="contained" component="label" color="secondary">
                 Прикрепить файл
-                <input type="file" hidden />
+                <input
+                    multiple
+                    type="file"
+                    name="fileFld"
+                    id="fileFld"
+                    hidden
+                    onChange={(e) => {
+                        console.log(e.target.files);
+                        props.setFiles(e.target.files);
+                    }}
+                />
             </Button>
+            <span>{renderFilesList(props.files)}</span>
         </>
     );
 };
@@ -41,13 +64,15 @@ export const TextArea = (props: any) => {
 };
 
 export const CreatePage = () => {
-    const { subjectData, coursesData, modulesData, openId, setIsAfterChanges } = useGlobal();
+    const { subjectData, coursesData, modulesData, setIsAfterChanges } = useGlobal();
 
     let location: any = useLocation();
     let navigate = useNavigate();
     let path = location.pathname;
 
     const [formData, setFormData] = useState({});
+
+    const [files, setFiles] = useState<any>(null);
 
     const [tutors, setTutors] = React.useState<any[]>([]);
     const [selectedTutorsIds, setSelectedTutorsIds] = React.useState<any[]>([]);
@@ -64,15 +89,12 @@ export const CreatePage = () => {
 
         setFormData(form);
         if ('tutors' in form && form.tutors.length > 0) {
-            //setTutors(form.tutors);
-
             const tutorsIds = form.tutors.map((tutor: any) => tutor.id);
             setSelectedTutorsIds(tutorsIds);
         }
     }, []);
 
     useEffect(() => {
-        // if (isEditing) return;
         setIsAfterChanges(false);
 
         api.get(TUTORS).then((tutorsData: any) => {
@@ -94,6 +116,16 @@ export const CreatePage = () => {
         navigate(from);
     };
 
+    const sendAttachFiles = async () => {
+        if (!files) return;
+
+        const url = new UrlBuilder().build(ATTACH_TOPIC, 'id').url;
+
+        for (const file of files) {
+            await api.post(url, file);
+        }
+    };
+
     return (
         <Grid display={'grid'} gridTemplateColumns={'1fr'} padding={'36px 30vw'} gap={3}>
             {fields.map((field: any) => {
@@ -107,7 +139,8 @@ export const CreatePage = () => {
                             field={field}
                         />
                     );
-                if (field.hasAttach) return <AttachFile field={field} />;
+                if (field.hasAttach)
+                    return <AttachFile files={files} setFiles={setFiles} field={field} />;
                 if (field.isTextArea)
                     return (
                         <TextArea
@@ -193,16 +226,17 @@ export const CreatePage = () => {
                             ...formData,
                             tutors: selectedTutors,
                             ...nestedModulesData,
+                            files: [],
                         };
 
                         if (isEditing) {
                             return api.put(PutUriManager[from], enhancedFormData).then((data) => {
-                                return navigateAfterChanges();
+                                return sendAttachFiles().then((r) => navigateAfterChanges());
                             });
                         }
 
                         return api.post(PostUriManager[from], enhancedFormData).then((data) => {
-                            return navigateAfterChanges();
+                            return sendAttachFiles().then((r) => navigateAfterChanges());
                         });
                     }}
                 >

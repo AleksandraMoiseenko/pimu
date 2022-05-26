@@ -2,11 +2,15 @@ import React from 'react';
 import { Box, Fab } from '@mui/material';
 import { Link, matchPath, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { routerPaths, TAB_LABEL_PATH_MAP } from '../const';
+import { UrlBuilder } from '../helpers';
+import { EXPORT_TUTORS } from '../urls';
 import { Header } from './Header';
 import AddIcon from '@mui/icons-material/Add';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
+// @ts-ignore
+import { saveAs } from 'file-saver';
 
 const fabStyleAddCourse = {
     position: 'absolute',
@@ -99,7 +103,15 @@ export function Layout() {
                 <AddIcon />
             </Fab>
             {path === routerPaths.teachers && (
-                <Fab color="primary" aria-label="add" sx={fabStyleAddTeacher}>
+                <Fab
+                    color="primary"
+                    aria-label="add"
+                    sx={fabStyleAddTeacher}
+                    onClick={(e: any) => {
+                        const url = new UrlBuilder().build(EXPORT_TUTORS).url;
+                        saveAs(`http://localhost:8080${url}`, 'tutors_list.csv');
+                    }}
+                >
                     <FileDownloadIcon />
                 </Fab>
             )}

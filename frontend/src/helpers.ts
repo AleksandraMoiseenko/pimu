@@ -65,7 +65,7 @@ export const PostUriManager = {
 };
 
 export class UrlBuilder {
-    _url;
+    private _url: string;
 
     constructor() {
         this._url = '';

@@ -1,13 +1,15 @@
-import { Button, FormControl, Grid, TextField } from '@mui/material';
+import FileDownloadIcon from '@mui/icons-material/FileDownload';
+import { Button, FormControl, Grid, IconButton, TextField } from '@mui/material';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { api } from '../api/client';
-import { CREATE_FIELDS_MAP } from '../const';
+import { CREATE_FIELDS_MAP, routerPaths } from '../const';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
-import { PostUriManager, PutUriManager } from '../helpers';
-import { TUTORS } from '../urls';
+import { PostUriManager, PutUriManager, UrlBuilder } from '../helpers';
+import { EXPORT_COURSE_TUTORS, TUTORS } from '../urls';
 import { SelectField } from './SelectField';
+import { saveAs } from 'file-saver';
 
 export const AttachFile = (props: any) => {
     return (
@@ -57,7 +59,7 @@ export const CreatePage = () => {
         }
 
         setFormData(form);
-        if (form.tutors.length > 0) {
+        if ('tutors' in form && form.tutors.length > 0) {
             setTutors(form.tutors);
 
             const tutorsIds = form.tutors.map((tutor) => tutor.id);
@@ -116,6 +118,28 @@ export const CreatePage = () => {
                     </FormControl>
                 );
             })}
+            {path === routerPaths.courses && isEditing && (
+                <div>
+                    <span>
+                        <IconButton
+                            edge="end"
+                            onClick={(e) => {
+                                e.stopPropagation();
+
+                                const url = new UrlBuilder().build(
+                                    EXPORT_COURSE_TUTORS,
+                                    item.id,
+                                ).url;
+
+                                saveAs(url, 'tutors.csv');
+                            }}
+                        >
+                            <FileDownloadIcon />
+                        </IconButton>
+                    </span>
+                    <span style={{ paddingLeft: 16 }}>Скачать список преподователей</span>
+                </div>
+            )}
             <FormControl sx={{ mt: 4 }}>
                 <Button
                     variant="contained"

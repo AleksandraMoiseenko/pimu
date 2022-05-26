@@ -69,7 +69,7 @@ export const CreatePage = () => {
     }, []);
 
     useEffect(() => {
-        if (isEditing) return;
+        // if (isEditing) return;
 
         api.get(TUTORS).then((tutorsData: any) => {
             setTutors(tutorsData.data);

@@ -11,6 +11,8 @@ export function GlobalProvider({ children }: { children: ReactNode }) {
     let initOpenId = '';
     const [openId, setOpenId] = useState(initOpenId);
 
+    const [isAfterChanges, setIsAfterChanges] = useState(false);
+
     const [subjectData, setSubjectData] = useState(null);
     const [coursesData, setCoursesData] = useState(null);
     const [modulesData, setModulesData] = useState(null);
@@ -49,6 +51,9 @@ export function GlobalProvider({ children }: { children: ReactNode }) {
         initOpenId,
         openId,
         setOpenId,
+
+        isAfterChanges,
+        setIsAfterChanges,
     };
 
     return <GlobalContext.Provider value={ctx}>{children}</GlobalContext.Provider>;

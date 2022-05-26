@@ -59,7 +59,8 @@ const renderDownloadIcon = (path: string, item: any) =>
     ) : null;
 
 export const Main = () => {
-    const { initOpenId, openId, setOpenId, resetSelectedData, handleSelectedData } = useGlobal();
+    const { initOpenId, openId, setOpenId, resetSelectedData, handleSelectedData, isAfterChanges } =
+        useGlobal();
 
     let initData: any[] = [];
     let initPage = 1;
@@ -68,7 +69,6 @@ export const Main = () => {
 
     let navigate = useNavigate();
     let location = useLocation();
-    const { afterChanges } = location.state;
     let path = location.pathname;
 
     const [data, setData] = useState<any[]>(initData);
@@ -78,7 +78,7 @@ export const Main = () => {
     const [dataPerPage] = useState(5);
 
     useEffect(() => {
-        if (afterChanges) return;
+        if (isAfterChanges) return;
 
         setPage(initPage);
 

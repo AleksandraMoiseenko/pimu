@@ -41,7 +41,7 @@ export const TextArea = (props: any) => {
 };
 
 export const CreatePage = () => {
-    const { subjectData, coursesData, modulesData, openId } = useGlobal();
+    const { subjectData, coursesData, modulesData, openId, setIsAfterChanges } = useGlobal();
 
     let location: any = useLocation();
     let navigate = useNavigate();
@@ -73,6 +73,7 @@ export const CreatePage = () => {
 
     useEffect(() => {
         // if (isEditing) return;
+        setIsAfterChanges(false);
 
         api.get(TUTORS).then((tutorsData: any) => {
             setTutors(tutorsData.data);
@@ -89,11 +90,8 @@ export const CreatePage = () => {
     };
 
     const navigateAfterChanges = () => {
-        navigate(from, {
-            state: {
-                afterChanges: true,
-            },
-        });
+        setIsAfterChanges(true);
+        navigate(from);
     };
 
     return (

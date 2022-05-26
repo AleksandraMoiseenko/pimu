@@ -59,11 +59,11 @@ const renderDownloadIcon = (path: string, item: any) =>
     ) : null;
 
 export const Main = () => {
-    const { resetSelectedData, handleSelectedData } = useGlobal();
+    const { initOpenId, openId, setOpenId, resetSelectedData, handleSelectedData } = useGlobal();
 
     let initData: any[] = [];
     let initPage = 1;
-    let initOpenId = '';
+
     let initPageCount = 0;
 
     let navigate = useNavigate();
@@ -73,7 +73,6 @@ export const Main = () => {
     const [data, setData] = useState<any[]>(initData);
     const [page, setPage] = useState(initPage);
     const [pageCount, setPageCount] = useState(initPageCount);
-    const [openId, setOpenId] = useState(initOpenId);
 
     const [dataPerPage] = useState(5);
 

@@ -8,6 +8,9 @@ export function GlobalProvider({ children }: { children: ReactNode }) {
     let location = useLocation();
     let path = location.pathname;
 
+    let initOpenId = '';
+    const [openId, setOpenId] = useState(initOpenId);
+
     const [subjectData, setSubjectData] = useState(null);
     const [coursesData, setCoursesData] = useState(null);
     const [modulesData, setModulesData] = useState(null);
@@ -42,6 +45,10 @@ export function GlobalProvider({ children }: { children: ReactNode }) {
 
         handleSelectedData,
         resetSelectedData,
+
+        initOpenId,
+        openId,
+        setOpenId,
     };
 
     return <GlobalContext.Provider value={ctx}>{children}</GlobalContext.Provider>;

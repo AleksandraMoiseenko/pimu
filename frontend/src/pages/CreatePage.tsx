@@ -4,11 +4,11 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { api, baseURL } from '../api/client';
-import { CREATE_FIELDS_MAP, routerPaths } from '../const';
+import { CREATE_FIELDS_MAP, routerPaths, ROUTES_DATA_FETCH } from '../const';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import { PostUriManager, PutUriManager, UrlBuilder } from '../helpers';
 import { useGlobal } from '../providers/GlobalProvider';
-import { EXPORT_COURSE_TUTORS, TUTORS } from '../urls';
+import { EXPORT_COURSE_TUTORS, PAGE_PARAM, SIZE_PARAM, TUTORS } from '../urls';
 import { SelectField } from './SelectField';
 // @ts-ignore
 import { saveAs } from 'file-saver';
@@ -41,7 +41,7 @@ export const TextArea = (props: any) => {
 };
 
 export const CreatePage = () => {
-    const { subjectData, coursesData, modulesData } = useGlobal();
+    const { subjectData, coursesData, modulesData, openId } = useGlobal();
 
     let location: any = useLocation();
     let navigate = useNavigate();
@@ -191,7 +191,12 @@ export const CreatePage = () => {
 
                         if (isEditing) {
                             return api.put(PutUriManager[from], enhancedFormData).then((data) => {
-                                navigate(from);
+                                const url = new UrlBuilder()
+                                    .build(ROUTES_DATA_FETCH[from], openId)
+                                    .build(PAGE_PARAM, '0')
+                                    .build(SIZE_PARAM, '5').url;
+
+                                navigate(url);
                             });
                         }
 

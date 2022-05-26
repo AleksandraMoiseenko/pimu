@@ -93,7 +93,7 @@ export function Layout() {
                     navigate(routerPaths.new, {
                         state: {
                             from: path,
-                            isEditing: true,
+                            isEditing: false,
                         },
                     });
                 }}

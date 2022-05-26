@@ -127,7 +127,11 @@ export const Main = () => {
                                                 textDecoration: 'underline',
                                             },
                                         }}
-                                        primary={item.name}
+                                        primary={
+                                            item.name
+                                                ? item.name
+                                                : `${item.firstname} ${item.lastname}`
+                                        }
                                         onClick={(e) => {
                                             e.stopPropagation();
                                             navigate(routerPaths.new, {

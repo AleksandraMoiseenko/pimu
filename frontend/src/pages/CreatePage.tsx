@@ -119,7 +119,7 @@ export const CreatePage = () => {
                     </FormControl>
                 );
             })}
-            {path === routerPaths.courses && isEditing && (
+            {from === routerPaths.courses && isEditing && (
                 <div>
                     <span>
                         <IconButton

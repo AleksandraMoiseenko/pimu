@@ -220,7 +220,7 @@ export const CreatePage = () => {
                         <AttachFile
                             files={files}
                             setFiles={setFiles}
-                            currentFiles={[{ id: 11, link: '', name: 'annotacia.docx' }]}
+                            currentFiles={currentFiles}
                             setCurrentFiles={setCurrentFiles}
                             field={field}
                             item={item}

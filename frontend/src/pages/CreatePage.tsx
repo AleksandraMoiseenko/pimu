@@ -1,5 +1,19 @@
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
-import { Box, Button, FormControl, Grid, IconButton, TextField } from '@mui/material';
+import {
+    Box,
+    Button,
+    FormControl,
+    Grid,
+    IconButton,
+    List,
+    ListItem,
+    ListItemButton,
+    ListItemIcon,
+    ListItemText,
+    TextField,
+    Typography,
+} from '@mui/material';
+import ClearIcon from '@mui/icons-material/Clear';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -8,14 +22,67 @@ import { CREATE_FIELDS_MAP, routerPaths, ROUTES_DATA_FETCH } from '../const';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import { PostUriManager, PutUriManager, UrlBuilder } from '../helpers';
 import { useGlobal } from '../providers/GlobalProvider';
-import { ATTACH_TOPIC, EXPORT_COURSE_TUTORS, PAGE_PARAM, SIZE_PARAM, TUTORS } from '../urls';
+import {
+    ATTACH_TOPIC,
+    DELETE_FILE,
+    DOWNLOAD_FILE,
+    EXPORT_COURSE_TUTORS,
+    PAGE_PARAM,
+    SIZE_PARAM,
+    TUTORS,
+} from '../urls';
 import { SelectField } from './SelectField';
 import './create-page.css';
 // @ts-ignore
 import { saveAs } from 'file-saver';
 
+const renderCurrentFileList = (currentFileList: any[] = [], setCurrentFiles: any, item: any) => {
+    const downloadUrl = new UrlBuilder().build(DOWNLOAD_FILE, item?.id).url;
+    const deleteUrl = new UrlBuilder().build(DELETE_FILE, item?.id).url;
+
+    useEffect(() => {
+        if (item && 'files' in item) {
+            setCurrentFiles(item.files);
+        }
+    }, []);
+
+    return (
+        <div>
+            {currentFileList.map((file) => (
+                <Box display="flex">
+                    <Typography
+                        sx={{
+                            marginRight: 1,
+                            cursor: 'pointer',
+                            '&:hover': {
+                                textDecoration: 'underline',
+                            },
+                        }}
+                        onClick={async (e) => {
+                            e.stopPropagation();
+                            saveAs(downloadUrl);
+                        }}
+                    >
+                        {file.name}
+                    </Typography>
+                    <IconButton
+                        size="small"
+                        sx={{ p: 0 }}
+                        onClick={async (e) => {
+                            e.stopPropagation();
+                            await api.delete(deleteUrl);
+                        }}
+                    >
+                        <ClearIcon />
+                    </IconButton>
+                </Box>
+            ))}
+        </div>
+    );
+};
+
 const renderFilesList = (files: FileList) => {
-    if (!files) return <span>Выберите файлы</span>;
+    if (!files) return <Typography>Выберите файлы, которые хотите добавить</Typography>;
 
     let filesList: string[] = [];
 
@@ -23,7 +90,7 @@ const renderFilesList = (files: FileList) => {
         filesList.push(file.name);
     }
 
-    return filesList.map((fileName) => <p>{fileName}</p>);
+    return filesList.map((fileName) => <p key={fileName}>{fileName}</p>);
 };
 
 export const AttachFile = (props: any) => {
@@ -31,6 +98,9 @@ export const AttachFile = (props: any) => {
         <>
             <span>{props.field.label}</span>
             <Box sx={{ border: '2px solid lightgray', padding: 2 }}>
+                <Box>
+                    {renderCurrentFileList(props.currentFiles, props.setCurrentFiles, props.item)}
+                </Box>
                 <label className="custom-file-upload">
                     {renderFilesList(props.files)}
                     <input
@@ -69,11 +139,11 @@ export const CreatePage = () => {
 
     let location: any = useLocation();
     let navigate = useNavigate();
-    let path = location.pathname;
 
     const [formData, setFormData] = useState({});
 
     const [files, setFiles] = useState<any>(null);
+    const [currentFiles, setCurrentFiles] = useState<any[]>([]);
 
     const [tutors, setTutors] = React.useState<any[]>([]);
     const [selectedTutorsIds, setSelectedTutorsIds] = React.useState<any[]>([]);
@@ -146,7 +216,16 @@ export const CreatePage = () => {
                         />
                     );
                 if (field.hasAttach)
-                    return <AttachFile files={files} setFiles={setFiles} field={field} />;
+                    return (
+                        <AttachFile
+                            files={files}
+                            setFiles={setFiles}
+                            currentFiles={[{ id: 11, link: '', name: 'annotacia.docx' }]}
+                            setCurrentFiles={setCurrentFiles}
+                            field={field}
+                            item={item}
+                        />
+                    );
                 if (field.isTextArea)
                     return (
                         <TextArea

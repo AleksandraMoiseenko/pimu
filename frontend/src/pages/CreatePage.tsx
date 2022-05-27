@@ -59,16 +59,17 @@ const renderCurrentFileList = (currentFileList: any[] = [], setCurrentFiles: any
                             e.stopPropagation();
                             const downloadUrl = new UrlBuilder().build(DOWNLOAD_FILE, file?.id).url;
 
-                            api.post(downloadUrl).then((response: any) => {
-                                const url = window.URL.createObjectURL(new Blob([response]));
-                                const link = document.createElement('a');
-                                link.href = url;
-                                link.setAttribute('download', file.name);
-                                document.body.appendChild(link);
-                                link.click();
-                                link.remove();
-                                //saveAs(response, file.name)
-                            });
+                            // api.post(downloadUrl).then((response: any) => {
+                            //     const url = window.URL.createObjectURL(new Blob([response]));
+                            //     const link = document.createElement('a');
+                            //     link.href = url;
+                            //     link.setAttribute('download', file.name);
+                            //     document.body.appendChild(link);
+                            //     link.click();
+                            //     link.remove();
+                            //
+                            // });
+                            saveAs(api.post(downloadUrl), file.name);
                         }}
                     >
                         {file.name}

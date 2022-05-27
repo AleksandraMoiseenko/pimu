@@ -90,7 +90,7 @@ const renderFilesList = (files: FileList) => {
         filesList.push(file.name);
     }
 
-    return filesList.map((fileName) => <p key={fileName}>{fileName}</p>);
+    return filesList.map((fileName) => <Typography key={fileName}>{fileName}</Typography>);
 };
 
 export const AttachFile = (props: any) => {

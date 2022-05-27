@@ -60,7 +60,7 @@ const renderCurrentFileList = (currentFileList: any[] = [], setCurrentFiles: any
                         }}
                         onClick={async (e) => {
                             e.stopPropagation();
-                            saveAs(downloadUrl);
+                            saveAs(`${baseURL}${downloadUrl}`, file.name);
                         }}
                     >
                         {file.name}

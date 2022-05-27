@@ -55,10 +55,11 @@ const renderCurrentFileList = (currentFileList: any[] = [], setCurrentFiles: any
                                 textDecoration: 'underline',
                             },
                         }}
-                        onClick={async (e) => {
+                        onClick={(e) => {
                             e.stopPropagation();
                             const downloadUrl = new UrlBuilder().build(DOWNLOAD_FILE, file?.id).url;
-                            saveAs(`${baseURL}${downloadUrl}`, file.name);
+
+                            api.post(downloadUrl).then((response) => saveAs(response, file.name));
                         }}
                     >
                         {file.name}

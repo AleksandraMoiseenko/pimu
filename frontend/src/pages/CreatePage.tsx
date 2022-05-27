@@ -59,21 +59,26 @@ const renderCurrentFileList = (currentFileList: any[] = [], setCurrentFiles: any
                             e.stopPropagation();
                             const downloadUrl = new UrlBuilder().build(DOWNLOAD_FILE, file?.id).url;
 
-                            api.post(downloadUrl, undefined, { responseType: 'blob' }).then(
-                                (response: any) => {
-                                    const url = window.URL.createObjectURL(new Blob([response]));
-                                    const link = document.createElement('a');
-                                    link.href = url;
-                                    link.setAttribute('download', file.name);
-                                    document.body.appendChild(link);
-                                    link.click();
-                                    link.remove();
-                                },
-                            );
+                            // api.post(downloadUrl, undefined, { responseType: 'blob' }).then(
+                            //     (response: any) => {
+                            //         const url = window.URL.createObjectURL(new Blob([response]));
+                            //         const link = document.createElement('a');
+                            //         link.href = url;
+                            //         link.setAttribute('download', file.name);
+                            //         document.body.appendChild(link);
+                            //         link.click();
+                            //         link.remove();
+                            //     },
+                            // );
 
-                            // api.post(downloadUrl, { responseType: 'blob' })
-                            //     .then((response: any) => response.blob())
-                            //     .then((blob) => saveAs(blob, file.name));
+                            api.post(downloadUrl, undefined, { responseType: 'blob' }).then(
+                                (response: any) =>
+                                    saveAs(
+                                        [response],
+                                        { type: 'application/octet-stream' },
+                                        file.name,
+                                    ),
+                            );
                         }}
                     >
                         {file.name}

@@ -69,7 +69,7 @@ const renderCurrentFileList = (currentFileList: any[] = [], setCurrentFiles: any
                             //     link.remove();
                             //
                             // });
-                            api.post(downloadUrl)
+                            api.post(downloadUrl, { responseType: 'blob' })
                                 .then((response: any) => response.blob())
                                 .then((blob) => saveAs(blob, file.name));
                         }}

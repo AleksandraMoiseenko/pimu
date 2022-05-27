@@ -37,9 +37,6 @@ import './create-page.css';
 import { saveAs } from 'file-saver';
 
 const renderCurrentFileList = (currentFileList: any[] = [], setCurrentFiles: any, item: any) => {
-    const downloadUrl = new UrlBuilder().build(DOWNLOAD_FILE, item?.id).url;
-    const deleteUrl = new UrlBuilder().build(DELETE_FILE, item?.id).url;
-
     useEffect(() => {
         if (item && 'files' in item) {
             setCurrentFiles(item.files);
@@ -60,6 +57,7 @@ const renderCurrentFileList = (currentFileList: any[] = [], setCurrentFiles: any
                         }}
                         onClick={async (e) => {
                             e.stopPropagation();
+                            const downloadUrl = new UrlBuilder().build(DOWNLOAD_FILE, file?.id).url;
                             saveAs(`${baseURL}${downloadUrl}`, file.name);
                         }}
                     >
@@ -70,6 +68,7 @@ const renderCurrentFileList = (currentFileList: any[] = [], setCurrentFiles: any
                         sx={{ p: 0 }}
                         onClick={async (e) => {
                             e.stopPropagation();
+                            const deleteUrl = new UrlBuilder().build(DELETE_FILE, file?.id).url;
                             await api.delete(deleteUrl);
                         }}
                     >
